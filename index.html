@@ -5,18 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="keywords" content="" />
-  <meta name="author" content="Shu Hu" />
+  <meta name="author" content="MC Lab" />
   <meta name="description" content="" />
   
   
   <title>
     
-      About 
+      Home 
       
       
       |
     
-     Shu Hu
+     MC Lab
   </title>
 
   
@@ -236,7 +236,8 @@
       if (isHidden) {
         searchOverlayArea.classList.remove('hidden')
         document.body.classList.add('hidden')
-        // inputArea.focus()
+        inputArea.focus()
+        inputArea.onclick() // this makes auto focus works
       } else {
         searchOverlayArea.classList.add('hidden')
         document.body.classList.remove('hidden')
@@ -404,7 +405,7 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + About + '&url=' + https%3A%2F%2Fmediacomplab.github.io%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Home + '&url=' + https%3A%2F%2Fmediacomplab.github.io%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
