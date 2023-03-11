@@ -10,7 +10,7 @@ html, body {
   transition: color 400ms ease-in-out 0s, background-color 400ms ease-in-out 0s;
   /* font-family: Consolas, "Liberation Mono", Menlo, Monaco, "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif */
   /* font-family:  "Times New Roman", Times, serif; */
-  font-family: "Courier New", Courier, monospace;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 body.hidden {
@@ -294,7 +294,7 @@ a:hover {
   /* margin: 0 5.5rem 0 5.5rem; */
   /* margin: 0 3vw; */
   /* font-size: 1.65rem; */
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   /* font-size: 1.5vw; */
   font-weight: bold;
   text-align: center;
