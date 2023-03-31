@@ -83,22 +83,22 @@
     
     
     <entry>
-      <title>Writings</title>
-      <link href="/people/index.html"/>
-      <url>/people/index.html</url>
+      <title>Home</title>
+      <link href="/index.html"/>
+      <url>/index.html</url>
       
-        <content type="html"><![CDATA[<div style="display:flex;">    <div style="margin:0 auto; display: flex; max-width: 40rem; height: auto;">        <div id="head-box">            <img id="head" src="https://ichef.bbci.co.uk/news/304/mcs/media/images/77517000/jpg/_77517139_kielrexfeatures.jpg" alt="Jaws"></img>        </div>        <div style="padding-left:1rem;max-width:27rem;height:auto;display:flex;align-items:flex-end">            <div style="max-width:27rem;height:auto;line-height:2.4rem;font-size:1.8rem">                <b>Jaws </b><br>                <b>jaws@gsu.edu</b><br>                <p>Hi, my name is Jaws. I like to sacrifice for humanity and beat Bond.</p>            </div>        </div>    </div></div>]]></content>
+        <content type="html"><![CDATA[<style>.link {    color: #4f8aff !important;    text-decoration: none !important;    border-bottom: none !important;}.link:hover {    font-weight: bold !important;}#head {  transition: transform .5s ease-in-out;}#head:hover {  transform: rotate(180deg);}#head-box {    max-width: 15rem;    max-height: 15rem;    display: flex;    align-items: flex-end}</style><div style="border-radius: 20px; background-color:black;overflow: hidden;">  <img id="head-will-rotate" src="https://media.npr.org/assets/img/2014/09/11/ap897989378136_custom-07227087c67711e30807c57a10a80e9405ad6448.jpg" alt="Lab"></img></div><h1 id="Media-Comprehension-Lab-at-GSU"><a href="#Media-Comprehension-Lab-at-GSU" class="headerlink" title="Media Comprehension Lab at GSU"></a>Media Comprehension Lab at GSU</h1>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>Home</title>
-      <link href="/index.html"/>
-      <url>/index.html</url>
+      <title>Writings</title>
+      <link href="/people/index.html"/>
+      <url>/people/index.html</url>
       
-        <content type="html"><![CDATA[<style>.link {    color: #4f8aff !important;    text-decoration: none !important;    border-bottom: none !important;}.link:hover {    font-weight: bold !important;}#head {  transition: transform .5s ease-in-out;}#head:hover {  transform: rotate(180deg);}#head-box {    max-width: 15rem;    max-height: 15rem;    display: flex;    align-items: flex-end}</style><div style="border-radius: 20px; background-color:black;overflow: hidden;">  <img id="head-will-rotate" src="https://media.npr.org/assets/img/2014/09/11/ap897989378136_custom-07227087c67711e30807c57a10a80e9405ad6448.jpg" alt="Lab"></img></div><h1 id="Media-Comprehension-Lab-at-GSU"><a href="#Media-Comprehension-Lab-at-GSU" class="headerlink" title="Media Comprehension Lab at GSU"></a>Media Comprehension Lab at GSU</h1>]]></content>
+        <content type="html"><![CDATA[<div style="display:flex;">    <div style="margin:0 auto; display: flex; max-width: 40rem; height: auto;">        <div id="head-box">            <img id="head" src="https://ichef.bbci.co.uk/news/304/mcs/media/images/77517000/jpg/_77517139_kielrexfeatures.jpg" alt="Jaws"></img>        </div>        <div style="padding-left:1rem;max-width:27rem;height:auto;display:flex;align-items:flex-end">            <div style="max-width:27rem;height:auto;line-height:2.4rem;font-size:1.8rem">                <b>Jaws </b><br>                <b>jaws@gsu.edu</b><br>                <p>Hi, my name is Jaws. I like to sacrifice for humanity and beat Bond.</p>            </div>        </div>    </div></div>]]></content>
       
     </entry>
     
