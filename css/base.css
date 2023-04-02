@@ -73,7 +73,8 @@ a:hover {
 }
 
 .flex-container {
-  min-height: calc(100vh - 290px);
+  /* min-height: calc(100vh - 290px); */
+  min-height: calc(100vh - 130px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -81,7 +82,7 @@ a:hover {
   /* 变形的时候的动画，之前被注释掉了 */
   transition: all 0.3s ease;
   /* 这个为了保证index页长了地下有一点空白 */
-  margin-bottom: 70px;
+  /* margin-bottom: 0; */
 }
 
 .header {
@@ -218,14 +219,6 @@ a:hover {
   margin: 0 30px;
 }
 
-.avatar {
-  /* text-align: center; */
-  align-items: end;
-  /* padding-bottom: 30px; */
-  margin-left: calc(100vw - 100%);
-  /* color: var(--color-text-a-active) !important; */
-}
-
 .avatar a {
   /*  */
   display: flex;
@@ -334,6 +327,12 @@ nav.navbar.fixed-top.navbar-expand-md {
   .nav-item:hover {
     background-color: transparent !important;
   }
+  .navbar .avatar:hover {
+    background-color: transparent !important;
+  }
+  .navbar .avatar {
+    padding: 0 !important;
+  }
 }
 
 button.navbar-toggler {
@@ -345,7 +344,7 @@ button.navbar-toggler {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  padding: 0 10%;
+  padding: 0 8%;
   background-color: var(--bg-block-md-pre);
 }
 
@@ -392,11 +391,14 @@ button.navbar-toggler {
 
 .navbar .avatar {
   margin: 0px;
-  padding: 0px;
+  padding: 0 3rem;
   font-size: 2rem;
-  /* height: 20px; */
   color: var(--color-text-a-active) !important;
   font-weight: bold;
+}
+
+.navbar .avatar:hover {
+  background-color: var(--color-border-md-table);
 }
 
 .post-navigation {

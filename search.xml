@@ -94,28 +94,6 @@
     
     
     <entry>
-      <title>tags</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Research</title>
-      <link href="/research/index.html"/>
-      <url>/research/index.html</url>
-      
-        <content type="html"><![CDATA[<details>    <summary style="font-size:2rem"><b>Comprehension of media</b></summary><p>Scene Perception and Event Cognition Theory (SPECT). When we experience visual narratives (comics, TV shows, Movies) there is a coordination of visual perception, attention, and comprehension processes.  Studies testing SPECT explore how processes such as inference generation affect where we look when we watch filmed narratives or read static sequential narratives. Example publications:</p><pre><code>Loschky et al., (2020)Loschk et a., (2015)Hutson et al., (2018)</code></pre><p>Multimedia processing of narratives. Visual narratives combine language and images. This area of research explores how different modalities combine to support comprehension</p><pre><code>Kopatich et al., (2015)</code></pre><p>Cinematic practices and comprehension. Filmmakers use cinematics to convey stories in fiction films. This area of research focuses on the impact of these practices on various aspects of experiencing fiction film. Example publications:</p><pre><code>Magliano &amp; Zacks (2011)Magliano et al., (2020)Clinton et al., (2017)</code></pre><p>Basic cognitive processes that support comprehension. Understanding the cognitive foundations of making sense of texts, comics, and movies&#x2F;tv shows is at the core of the research conducted by the media comprehension lab.</p><pre><code>Feller et al. aspect parMagliano inference mediation</code></pre></details><details>    <summary style="font-size:2rem"><b>Understanding what factors affect adults' success in understanding and using media</b></summary><p>PAR<br>College readers </p></details><details>    <summary style="font-size:2rem"><b>Using construct response to learn about readers</b></summary>    <p>RSAT<br>NLP sstudes</p></details>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Writings</title>
       <link href="/people/index.html"/>
       <url>/people/index.html</url>
@@ -132,6 +110,28 @@
       <url>/publications/index.html</url>
       
         <content type="html"><![CDATA[<p>some publications will be here</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>tags</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Research</title>
+      <link href="/research/index.html"/>
+      <url>/research/index.html</url>
+      
+        <content type="html"><![CDATA[<details>    <summary style="font-size:2rem"><b>Comprehension of media</b></summary><p>Scene Perception and Event Cognition Theory (SPECT). When we experience visual narratives (comics, TV shows, Movies) there is a coordination of visual perception, attention, and comprehension processes.  Studies testing SPECT explore how processes such as inference generation affect where we look when we watch filmed narratives or read static sequential narratives. Example publications:</p><pre><code>Loschky et al., (2020)Loschk et a., (2015)Hutson et al., (2018)</code></pre><p>Multimedia processing of narratives. Visual narratives combine language and images. This area of research explores how different modalities combine to support comprehension</p><pre><code>Kopatich et al., (2015)</code></pre><p>Cinematic practices and comprehension. Filmmakers use cinematics to convey stories in fiction films. This area of research focuses on the impact of these practices on various aspects of experiencing fiction film. Example publications:</p><pre><code>Magliano &amp; Zacks (2011)Magliano et al., (2020)Clinton et al., (2017)</code></pre><p>Basic cognitive processes that support comprehension. Understanding the cognitive foundations of making sense of texts, comics, and movies&#x2F;tv shows is at the core of the research conducted by the media comprehension lab.</p><pre><code>Feller et al. aspect parMagliano inference mediation</code></pre></details><details>    <summary style="font-size:2rem"><b>Understanding what factors affect adults' success in understanding and using media</b></summary><p>PAR<br>College readers </p></details><details>    <summary style="font-size:2rem"><b>Using construct response to learn about readers</b></summary>    <p>RSAT<br>NLP sstudes</p></details>]]></content>
       
     </entry>
     
