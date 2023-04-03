@@ -10,13 +10,15 @@ function isHidden() {
 
 const backToTop = () => {
   let scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop,
+      document.documentElement.scrollTop || document.body.scrollTop, // don't know why documentElement doesn't work
+      // document.body.scrollTop,
     delay = 10,
     time = 200;
   let step = Math.ceil(scrollTop * delay / time);
   let timer = setInterval(() => {
     scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
+      // document.documentElement.scrollTop || document.body.scrollTop;
+      document.body.scrollTop;
     if (scrollTop - step <= 0) {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
