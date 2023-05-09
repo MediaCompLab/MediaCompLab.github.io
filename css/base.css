@@ -10,8 +10,8 @@ html, body {
   transition: color 400ms ease-in-out 0s, background-color 400ms ease-in-out 0s;
   /* font-family: Consolas, "Liberation Mono", Menlo, Monaco, "Source Han Sans CN", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif */
   /* font-family:  "Times New Roman", Times, serif; */
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  /* font-family: Verdana, Arial, Tahoma, Serif; */
+  /* font-family: Georgia, 'Times New Roman', Times, serif; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 body.hidden {
@@ -102,6 +102,12 @@ a:hover {
 .about-index .markdown-body {
   padding: 0 40px;
 }
+
+/* 0508 added */
+.tag-list {
+  text-align: center;
+}
+/*  */
 
 .category-index .category-list {
   padding: 0 110px;
@@ -225,7 +231,8 @@ a:hover {
   height: 100%;
   align-items: center;
   /*  */
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
   /* color: var(--color-text-a-active) !important; */
 }
 
@@ -345,7 +352,8 @@ button.navbar-toggler {
   justify-content: space-between;
   width: 100%;
   padding: 0 8%;
-  background-color: var(--bg-block-md-pre);
+  /* background-color: var(--bg-block-md-pre); */
+  background-color: var(--bar-color);
 }
 
 /* .navbar ul li.active a {
@@ -359,9 +367,10 @@ button.navbar-toggler {
   height: 100%;
   /* margin-left: 2rem; */
   /* padding: 0 3rem; */
-  color: var(--color-text-a) !important;
+  color: var(--bar-txt) !important;
   display: flex;
   align-items: center;
+  font-weight: 700;
 }
 
 .nav-item {
@@ -374,12 +383,13 @@ button.navbar-toggler {
   align-items: center;
   color: var(--color-text-a-active) !important;
   /* background-color: #24292e; */
+  /* font-weight: 900; */
 }
 
 .nav-item:hover {
   align-items: center;
   /* color: var(--color-text-a-active) !important; */
-  background-color: var(--color-border-md-table);
+  background-color: var(--bar-color-active);
 }
 
 .navbar button {
@@ -398,7 +408,11 @@ button.navbar-toggler {
 }
 
 .navbar .avatar:hover {
-  background-color: var(--color-border-md-table);
+  background-color: var(--bar-color-active);
+}
+
+.navbar .avatar a:hover {
+  font-weight: 900 !important;
 }
 
 .post-navigation {
@@ -438,6 +452,9 @@ button.navbar-toggler {
   position: relative;
   padding: 0 2px;
   border-radius: 2px;
+  /* below 2 added */
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 /*.tag-list li .tag-list-link:hover {

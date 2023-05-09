@@ -24,6 +24,10 @@
     <link rel="icon" href="/images/icon_with_space.png">
   
 
+  <!-- google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <!-- Bootstrap for navbar DIY -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   
@@ -79,7 +83,7 @@
     <div id="app">
       <div class="header">
   <nav class="navbar fixed-top navbar-expand-md">
-    <div class="nav-container shadow">
+    <div class="nav-container">
       <!-- <div class="avatar"> -->
       <!-- <div class="avatar mb=0 h1"> -->
       <div class="navbar-brand avatar mb=0 h1" data-path="/">
@@ -118,8 +122,8 @@
               <a class="nav-link" href="/people/">PEOPLE</a>
             </li>
           
-            <li class="nav-item" data-path="/archives/">
-              <a class="nav-link" href="/archives/">NEWS</a>
+            <li class="nav-item" data-path="/tags/">
+              <a class="nav-link" href="/tags/">NEWS</a>
             </li>
           
             <li class="nav-item" data-path="/publications/">
@@ -143,9 +147,44 @@
       
 
         <!-- 写作页 url形式：https://yoursite/writings/ -->
+<style>
+#lab-name {
+  width:60%;
+  position:absolute;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  /* left:20%; */
+  padding: 0 40px;
+  text-align: center;
+  text-shadow: 7px 0px 0px rgba(0, 0, 0, 0.5);
+}
+#name-txt {
+  font-size: 6rem;
+}
+@media (max-width: 888px) {
+  #lab-name {
+    font-size:small !important;
+    width: 90%;
+    padding: 0 7.5px;
+    transform: translate(-50%, -100%);
+  }
+  #name-txt {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 1200px) and (min-width: 887px) {
+  #lab-name {
+    padding: 0 20px;
+  }
+}
+</style>
 
-<div style="border-radius: 0px; background-color:black; overflow: hidden; height:auto;">
+<div style="position: relative; color: white; border-radius: 0px; background-color:black; overflow: hidden; height:auto;">
   <img style='margin:0; max-width: 100%;' src="https://netcommunity.gsu.edu/view.image?Id=3002" alt="Lab"></img>
+  <!-- 50-60/2 -->
+  <div id="lab-name">
+    <h1 id="name-txt">Media Comprehension Laboratory</h1>
+  </div>
 </div>
 
 <div class="container about-index">
@@ -177,11 +216,11 @@
   <img style='margin:0; max-width: 100%;' src="https://netcommunity.gsu.edu/view.image?Id=3002" alt="Lab"></img>
 </div> -->
 
-<h1 id="Media-Comprehension-Laboratory"><a href="#Media-Comprehension-Laboratory" class="headerlink" title="Media Comprehension Laboratory"></a>Media Comprehension Laboratory</h1><h4 id="The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano"><a href="#The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano" class="headerlink" title="The Media Comprehension Lab is directed by Joe Magliano"></a>The Media Comprehension Lab is directed by <a target="_blank" rel="noopener" href="https://education.gsu.edu/profile/joe-magliano/">Joe Magliano</a></h4><h4 id="The-Media-Comprehension-Lab-studies-three-areas-of-research"><a href="#The-Media-Comprehension-Lab-studies-three-areas-of-research" class="headerlink" title="The Media Comprehension Lab studies three areas of research:"></a>The Media Comprehension Lab studies three areas of research:</h4><blockquote>
-<p>First, we experience information across a variety of media, such as texts, comics, and TV&#x2F;Movies. We study how adults make sense different media and what is common and unique about those experiences. </p>
-<p>Second, adults vary in many ways that help them become successful with processing media.  This variability has implications for being prepared for college, the workforce, and lifelong learning.  We study what makes adults ready to make sense of media in these contexts.</p>
-<p>Third, we learn about how adults make sense of media by having them write or talk about their understanding texts, comics, or movie&#x2F;tv shows, which are called constructed responses. We use computational methodologies to make sense of constructed responses to learn about how they make sense of different media.</p>
-</blockquote>
+<!-- # Media Comprehension Laboratory -->
+
+<h4 id="The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano"><a href="#The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano" class="headerlink" title="The Media Comprehension Lab is directed by Joe Magliano"></a>The Media Comprehension Lab is directed by <a target="_blank" rel="noopener" href="https://education.gsu.edu/profile/joe-magliano/">Joe Magliano</a></h4><h4 id="The-Media-Comprehension-Lab-studies-three-areas-of-research"><a href="#The-Media-Comprehension-Lab-studies-three-areas-of-research" class="headerlink" title="The Media Comprehension Lab studies three areas of research:"></a>The Media Comprehension Lab studies three areas of research:</h4><p><span class="badge bg-info text-light" style="font-size:1.5rem">First</span> we experience information across a variety of media, such as texts, comics, and TV&#x2F;Movies. We study how adults make sense of different media and what is common and unique about those experiences. </p>
+<p><span class="badge bg-info text-light" style="font-size:1.5rem">Second</span> adults vary in many ways that help them become successful with processing media.  This variability has implications for being prepared for college, the work force, and lifelong learning.  We study what makes adults ready to make sense of media in these contexts.</p>
+<p><span class="badge bg-info text-light" style="font-size:1.5rem">Third</span> we learn about how adults make sense of media by having them write or talk about their understanding texts, comics, or movie&#x2F;tv shows, which are called constructed responses. We use computational methodologies to make sense of constructed responses to learn about how they make sense of different media.</p>
 
     </div>
   </div>
