@@ -1478,7 +1478,7 @@ button.navbar-toggler {
   height: 100%;
   /* margin-left: 2rem; */
   /* padding: 0 3rem; */
-  color: var(--bar-txt) !important;
+  /* color: var(--bar-txt) !important; */
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -1488,18 +1488,12 @@ button.navbar-toggler {
   height: 100%;
   align-items: center;
   padding: 0 2rem;
-}
-
-.nav-link:hover {
-  align-items: center;
-  color: var(--color-text-a-active) !important;
-  /* background-color: #24292e; */
-  /* font-weight: 900; */
+  color: var(--bar-txt) !important;
 }
 
 .nav-item:hover {
   align-items: center;
-  /* color: var(--color-text-a-active) !important; */
+  color: var(--color-text-a-active) !important;
   background-color: var(--bar-color-active);
 }
 
