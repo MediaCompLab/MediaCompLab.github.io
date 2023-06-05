@@ -1075,10 +1075,11 @@ figure .pin-copy {
   --bg-block-md-table-2: #f6f8fa;
   --color-border-md-table: #dfe2e5;
   /* for website */
-  --bar-color: #f9d325;
-  --bar-color-active: rgba(255, 251, 0, 0.5);
-  --bg-color: #f1dfd3;
-  --bar-txt: rgba(0, 0, 0, 0.6);
+  --bar-color: #000000;
+  --bar-color-active: rgba(255, 255, 255, 0.05);
+  --bg-color: #f3f7ff;
+  --bar-txt: #ffffffc4;
+  --bar-txt-active: #ffffff;
 }
 
 /* dark scheme */
@@ -1103,10 +1104,11 @@ figure .pin-copy {
   --bg-block-md-table-2: #313744;
   --color-border-md-table: #4c566a;
   /* for website */
-  --bar-color: #e3d477;
-  --bar-color-active: rgba(255, 251, 0, 0.2);
+  --bar-color: #ffffff;
+  --bar-color-active: rgba(0, 0, 0, 0.05);
   --bg-color: #75654c;
-  --bar-txt: rgba(0, 0, 0, 0.6);
+  --bar-txt: #000e24cb;
+  --bar-txt-active: #000000;
 }
 
 * {
@@ -1344,7 +1346,7 @@ a:hover {
   /*  */
   font-size: 2.5rem;
   font-weight: 700;
-  /* color: var(--color-text-a-active) !important; */
+  color: var(--bar-txt) !important;
 }
 
 .avatar img {
@@ -1468,17 +1470,17 @@ button.navbar-toggler {
 }
 
 /* .navbar ul li.active a {
-  color: var(--color-text-a-active);
+  color: var(--bar-txt-active);
 } */
 #navbarNav ul li.active a {
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt-active) !important;
 }
 
 .nav-link {
   height: 100%;
   /* margin-left: 2rem; */
   /* padding: 0 3rem; */
-  /* color: var(--bar-txt) !important; */
+  color: var(--bar-txt) !important;
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -1493,7 +1495,7 @@ button.navbar-toggler {
 
 .nav-item:hover {
   align-items: center;
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt-active) !important;
   background-color: var(--bar-color-active);
 }
 
@@ -1508,7 +1510,7 @@ button.navbar-toggler {
   margin: 0px;
   padding: 0 3rem;
   font-size: 2rem;
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt) !important;
   font-weight: bold;
 }
 
@@ -1518,6 +1520,7 @@ button.navbar-toggler {
 
 .navbar .avatar a:hover {
   font-weight: 900 !important;
+  color: var(--bar-txt-active) !important;
 }
 
 .post-navigation {

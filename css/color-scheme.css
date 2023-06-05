@@ -20,10 +20,11 @@
   --bg-block-md-table-2: #f6f8fa;
   --color-border-md-table: #dfe2e5;
   /* for website */
-  --bar-color: #f9d325;
-  --bar-color-active: rgba(255, 251, 0, 0.5);
-  --bg-color: #f1dfd3;
-  --bar-txt: rgba(0, 0, 0, 0.6);
+  --bar-color: #000000;
+  --bar-color-active: rgba(255, 255, 255, 0.05);
+  --bg-color: #f3f7ff;
+  --bar-txt: #ffffffc4;
+  --bar-txt-active: #ffffff;
 }
 
 /* dark scheme */
@@ -48,8 +49,9 @@
   --bg-block-md-table-2: #313744;
   --color-border-md-table: #4c566a;
   /* for website */
-  --bar-color: #e3d477;
-  --bar-color-active: rgba(255, 251, 0, 0.2);
+  --bar-color: #ffffff;
+  --bar-color-active: rgba(0, 0, 0, 0.05);
   --bg-color: #75654c;
-  --bar-txt: rgba(0, 0, 0, 0.6);
+  --bar-txt: #000e24cb;
+  --bar-txt-active: #000000;
 }

@@ -233,7 +233,7 @@ a:hover {
   /*  */
   font-size: 2.5rem;
   font-weight: 700;
-  /* color: var(--color-text-a-active) !important; */
+  color: var(--bar-txt) !important;
 }
 
 .avatar img {
@@ -357,17 +357,17 @@ button.navbar-toggler {
 }
 
 /* .navbar ul li.active a {
-  color: var(--color-text-a-active);
+  color: var(--bar-txt-active);
 } */
 #navbarNav ul li.active a {
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt-active) !important;
 }
 
 .nav-link {
   height: 100%;
   /* margin-left: 2rem; */
   /* padding: 0 3rem; */
-  /* color: var(--bar-txt) !important; */
+  color: var(--bar-txt) !important;
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -382,7 +382,7 @@ button.navbar-toggler {
 
 .nav-item:hover {
   align-items: center;
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt-active) !important;
   background-color: var(--bar-color-active);
 }
 
@@ -397,7 +397,7 @@ button.navbar-toggler {
   margin: 0px;
   padding: 0 3rem;
   font-size: 2rem;
-  color: var(--color-text-a-active) !important;
+  color: var(--bar-txt) !important;
   font-weight: bold;
 }
 
@@ -407,6 +407,7 @@ button.navbar-toggler {
 
 .navbar .avatar a:hover {
   font-weight: 900 !important;
+  color: var(--bar-txt-active) !important;
 }
 
 .post-navigation {
