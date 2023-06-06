@@ -1106,7 +1106,7 @@ figure .pin-copy {
   /* for website */
   --bar-color: #ffffff;
   --bar-color-active: rgba(0, 0, 0, 0.05);
-  --bg-color: #75654c;
+  --bg-color: #3a3a3a;
   --bar-txt: #000e24cb;
   --bar-txt-active: #000000;
 }
@@ -1432,7 +1432,8 @@ nav.navbar.fixed-top.navbar-expand-md {
 /* for collapse */
 @media (max-width: 888px) {
   .navbar-nav.text-center.ms-auto {
-    border-top: 1px solid var(--color-border-md-table);
+    /* border-top: 1px solid var(--color-border-md-table); */
+    /* border-top: 1px solid var(--color-text-base); */
   }
   .nav-item {
     height: auto !important;

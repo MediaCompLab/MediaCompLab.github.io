@@ -319,7 +319,8 @@ nav.navbar.fixed-top.navbar-expand-md {
 /* for collapse */
 @media (max-width: 888px) {
   .navbar-nav.text-center.ms-auto {
-    border-top: 1px solid var(--color-border-md-table);
+    /* border-top: 1px solid var(--color-border-md-table); */
+    /* border-top: 1px solid var(--color-text-base); */
   }
   .nav-item {
     height: auto !important;
