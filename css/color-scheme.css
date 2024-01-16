@@ -1,6 +1,6 @@
 /* light scheme */
 :root[color-mode="light"] {
-  --bg-body: #FFFFFF;
+  --bg-body: #f3e8dc;
   --color-text-base: #666;
   --color-text-a: #666;
   --color-text-a-hover: #000000;
@@ -8,22 +8,22 @@
   --color-text-sub: #8e8e8e;
   --color-text-md-title: #24292e;
   --color-text-md-content: #24292e;
-  --color-text-md-code: #e96900;
+  --color-text-md-code: #CC0000;
   --bg-text-md-code: #f8f8f8;
   --bg-block-md-quote: #EEEEEE;
   --color-block-md-quote: #555555;
   --color-divider-md-border: #5858581a;
-  --bg-content-search: rgb(255 255 255 / 60%);
+  --bg-content-search: rgba(255, 255, 255, 0.8);
   --bg-block-md-pre: #e6e6e6;
   --color-text-md-pre: #555555;
-  --bg-block-md-table: #ffffff;
-  --bg-block-md-table-2: #f6f8fa;
+  --bg-block-md-table: #f3e8dc;
+  --bg-block-md-table-2: #f7efe8;
   --color-border-md-table: #dfe2e5;
   /* for website */
-  --bar-color: #000000;
-  --bar-color-active: rgba(255, 255, 255, 0.05);
+  --bar-color: #ffffff;
+  --bar-color-active: rgb(255, 255, 255);
   --bg-color: #f3f7ff;
-  --bar-txt: #ffffffc4;
+  --bar-txt: #ffffff;
   --bar-txt-active: #ffffff;
 }
 

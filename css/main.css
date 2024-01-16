@@ -1055,7 +1055,7 @@ figure .pin-copy {
 
 /* light scheme */
 :root[color-mode="light"] {
-  --bg-body: #FFFFFF;
+  --bg-body: #f3e8dc;
   --color-text-base: #666;
   --color-text-a: #666;
   --color-text-a-hover: #000000;
@@ -1063,22 +1063,22 @@ figure .pin-copy {
   --color-text-sub: #8e8e8e;
   --color-text-md-title: #24292e;
   --color-text-md-content: #24292e;
-  --color-text-md-code: #e96900;
+  --color-text-md-code: #CC0000;
   --bg-text-md-code: #f8f8f8;
   --bg-block-md-quote: #EEEEEE;
   --color-block-md-quote: #555555;
   --color-divider-md-border: #5858581a;
-  --bg-content-search: rgb(255 255 255 / 60%);
+  --bg-content-search: rgba(255, 255, 255, 0.8);
   --bg-block-md-pre: #e6e6e6;
   --color-text-md-pre: #555555;
-  --bg-block-md-table: #ffffff;
-  --bg-block-md-table-2: #f6f8fa;
+  --bg-block-md-table: #f3e8dc;
+  --bg-block-md-table-2: #f7efe8;
   --color-border-md-table: #dfe2e5;
   /* for website */
-  --bar-color: #000000;
-  --bar-color-active: rgba(255, 255, 255, 0.05);
+  --bar-color: #ffffff;
+  --bar-color-active: rgb(255, 255, 255);
   --bg-color: #f3f7ff;
-  --bar-txt: #ffffffc4;
+  --bar-txt: #ffffff;
   --bar-txt-active: #ffffff;
 }
 
@@ -1200,7 +1200,7 @@ a:hover {
 
 .header {
   /* padding: 50px 0; */
-  padding-bottom: 50px;
+  padding-bottom: 0px;
 }
 
 .container {
@@ -1352,8 +1352,8 @@ a:hover {
 .avatar img {
   /* height: 60px;
   width: 60px; */
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   /* border-radius: 50%; */
   transition: transform .5s ease-in-out;
 }
@@ -1396,7 +1396,7 @@ a:hover {
   /* margin-left: calc(100vw - 100%); */
   margin-left: auto;
   margin-right: auto;
-  height: 40px;
+  height: 20px;
   /* width: 60%; */
   /* margin-left: 25%; */
   /* display: flex; */
@@ -1410,11 +1410,31 @@ a:hover {
   flex-wrap: wrap;
   font-size: 2rem;
   box-sizing: border-box;
-  min-height: 5vh;
+  min-height: 10px;
 
-  /* color: var(--color-text-base) !important; */
-  color: var(--color-text-a)
+  /* color: var(--color-text-a) */
+  /* color: #0039A6; */
 }
+
+/* -------------------------------------------- */
+.home-page #navbar {
+  position: absolute;
+  top: 50%; /* 调整为适当的百分比 */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 其他样式 */
+}
+
+/* 导航栏移动到顶部的样式 */
+#navbar.at-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  width: 100%;
+  transition: transform 0.5s, top 0.5s; /* 平滑的过渡效果 */
+}
+/* -------------------------------------------- */
 
 .navbar-expand-md .navbar-nav {
   height: 100%;
@@ -1436,18 +1456,14 @@ nav.navbar.fixed-top.navbar-expand-md {
     /* border-top: 1px solid var(--color-text-base); */
   }
   .nav-item {
-    height: auto !important;
+    height: 100% !important;
   }
   .nav-link {
-    height: auto !important;
+    height: 100% !important;
   }
-  .navbar-nav {
-    height: auto !important;
-    padding-bottom: 20px;
-  }
-  .nav-item:hover {
+  /* .nav-item:hover {
     background-color: transparent !important;
-  }
+  } */
   .navbar .avatar:hover {
     background-color: transparent !important;
   }
@@ -1457,54 +1473,57 @@ nav.navbar.fixed-top.navbar-expand-md {
 }
 
 button.navbar-toggler {
-  padding: 0 0 8px 0;
+  padding: 0 0 0px 0;
 }
 
 .nav-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 100%;
   width: 100%;
   padding: 0 8%;
   /* background-color: var(--bg-block-md-pre); */
-  background-color: var(--bar-color);
+  /* background-color: var(--bar-color); */
+  background-color: #0039A6;
 }
 
-/* .navbar ul li.active a {
-  color: var(--bar-txt-active);
-} */
+.navbar ul li.active a {
+  color: var(--bar-txt-active) !important;
+}
+
 #navbarNav ul li.active a {
   color: var(--bar-txt-active) !important;
 }
 
 .nav-link {
   height: 100%;
-  /* margin-left: 2rem; */
-  /* padding: 0 3rem; */
-  color: var(--bar-txt) !important;
+  color: var(--bar-txt);
   display: flex;
   align-items: center;
   font-weight: 700;
+}
+
+
+.nav-link:hover {
+  color: var(--bar-txt-active);
 }
 
 .nav-item {
   height: 100%;
   align-items: center;
   padding: 0 2rem;
-  color: var(--bar-txt) !important;
+  color: var(--bar-txt);
 }
 
 .nav-item:hover {
   align-items: center;
-  color: var(--bar-txt-active) !important;
-  background-color: var(--bar-color-active);
 }
 
 .navbar button {
   /* color: var(--color-text-a) */
   color: var(--color-text-base) !important;
   border: 0;
-  /* border-color: transparent !important; */
 }
 
 .navbar .avatar {
@@ -1521,7 +1540,8 @@ button.navbar-toggler {
 
 .navbar .avatar a:hover {
   font-weight: 900 !important;
-  color: var(--bar-txt-active) !important;
+  /* color: var(--bar-txt-active) !important; */
+  color: #0039A6 !important;
 }
 
 .post-navigation {
@@ -1781,7 +1801,7 @@ button.navbar-toggler {
   opacity: 1;
   background-color: transparent;
   z-index: 999;
-  border-radius: 10px;
+  border-radius: 2px;
   margin: 0 2rem;
   transition: top 0.2s ease, opacity 0.2s ease;
   outline: 0;
@@ -1798,7 +1818,7 @@ button.navbar-toggler {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 2px;
   background-color: var(--bg-content-search);
   padding: 0 8px;
   box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
@@ -1820,7 +1840,7 @@ button.navbar-toggler {
   max-height: 350px;
   overflow: auto;
   background-color: var(--bg-content-search);
-  border-radius: 10px;
+  border-radius: 2px;
   margin-top: 8px;
 }
 
@@ -1859,6 +1879,8 @@ button.navbar-toggler {
   position: fixed;
   right: 2.2rem;
   bottom: 2.2rem;
+  /* so that not covered by others */
+  z-index: 10;
 }
 
 .tools-bar .tools-bar-item {

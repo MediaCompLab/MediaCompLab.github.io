@@ -20,8 +20,8 @@
   </title>
 
   
-    <link rel="apple-touch-icon" href="/images/icon_with_space.png">
-    <link rel="icon" href="/images/icon_with_space.png">
+    <link rel="apple-touch-icon" href="/images/icon_white.png">
+    <link rel="icon" href="/images/icon_black.png">
   
 
   <!-- google font -->
@@ -78,64 +78,144 @@
 
 
   <body>
-    <div id="particles-js" style="margin: 0; padding: 0; height: 100%; width: 100%; position: fixed;"></div>
+    <!-- <div id="particles-js" style="margin: 0; padding: 0; height: 100%; width: 100%; position: fixed;"></div> -->
     <div id="app">
-      <div class="header">
-  <nav class="navbar fixed-top navbar-expand-md">
-    <div class="nav-container">
-      <!-- <div class="avatar"> -->
-      <!-- <div class="avatar mb=0 h1"> -->
-      <div class="navbar-brand avatar mb=0 h1" data-path="/">
-        <!-- <div></div> -->
-        <a href="/">
-          <!-- 头像取消懒加载，添加no-lazy -->
-          
-            <img style="padding: 0 6px 12px 6px;" src="/images/icon.png" alt="">
-          
-          MC Lab
-        </a>
-        <!-- <div class="nickname"><a href="/">Lab</a></div> -->
-      </div>
-      <button type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      class="navbar-toggler"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" style="padding: 0;">
-          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-        </svg>
+      <style>
+
+.navbar-toggler.collapsed ~ .navbar-collapse .navbar-nav {
+  max-height: none;
+}
+
+.navbar {
+  background-color: #b9b6a4;
+  height: auto !important; /* 自动根据内容调整高度 */
+  padding: 0 8%;
+}
+
+.container-fluid.justify-content-center {
+  padding: 0 !important; /* 重要: 移除额外的内边距 */
+  height: auto !important; /* 设置高度与父元素相同 */
+}
+
+@media (max-width: 888px) {  
+  .navbar.navbar-custom {
+    padding: 0 !important;
+    text-align: center; /* 使内容在导航栏中居中 */
+  }
+
+  .navbar-brand, .nav-item{
+    display: flex; /* 确保 navbar-brand 是块级元素，以便居中 */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-collapse.collapsing,
+  .navbar-collapse.show {
+    width: 100%;
+    background-color: #b9b6a4; /* 背景色 */
+    padding-bottom: 10px;
+    height: auto !important; /* 允许内容根据实际高度展开 */
+    overflow: hidden; /* 防止内容溢出 */
+  }
+
+  .navbar-nav {
+    display: block; /* 让导航项垂直排列 */
+  }
+
+  .nav-item {
+    width: 100%; /* 使导航项填满整个宽度 */
+    padding: 0.5rem 0; /* 添加一些垂直内边距 */
+  }
+
+  .nav-link {
+    text-align: center; /* 让链接文字居中 */
+  }
+}
+
+
+@media (min-width: 889px) {
+  /* put the navbar-brand on the left for wide screen */
+  .navbar-brand {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+  }
+
+  .navbar-nav .nav-link {
+    position: relative; /* 设置相对定位以支持绝对定位的伪元素 */
+    display: inline-block; /* 确保链接的布局行为像块级元素一样 */
+  }
+
+  .navbar-nav .nav-link:hover:after {
+    content: ''; /* 伪元素的内容为空 */
+    position: absolute; /* 绝对定位 */
+    left: 0; /* 从链接的左边缘开始 */
+    right: 0; /* 伸展到链接的右边缘 */
+    bottom: -3px; /* 在链接底部下方显示，调整以符合具体布局 */
+    border-bottom: 3px solid rgb(255, 255, 255); /* 底部边框作为下划线 */
+    width: 100%; /* 确保宽度与父元素（链接）一致 */
+    z-index: 2;
+  }
+
+  
+}
+.nav-item.active .nav-link:after {
+  content: ''; /* 伪元素的内容为空 */
+  position: absolute; /* 绝对定位 */
+  left: 0; /* 从链接的左边缘开始 */
+  right: 0; /* 伸展到链接的右边缘 */
+  bottom: -3px; /* 在链接底部下方显示 */
+  border-bottom: 3px solid #CC0000; /* 红色底部边框作为下划线 */
+  width: 100%; /* 确保宽度与父元素（链接）一致 */
+  z-index: 2;
+}
+
+.nav-link {
+  position: relative; /* 确保.nav-link支持绝对定位的子元素 */
+  display: inline-block; /* 或者保持您原有的显示方式 */
+}
+
+</style>
+
+<div class="header">
+  <div class="school-banner" style="padding: 10px 8%; background-color: #0039A6;">
+    <a class="navbar-brand" href="/">
+      <img src="/images/cehd-white2.png" alt="School Logo" style="height: 100px;">
+    </a>
+  </div>
+  <nav class="navbar navbar-expand-md navbar-custom" style="background-color: #b9b6a4; padding: 0 8%;">
+    <div class="container-fluid justify-content-center">
+      <button class="navbar-toggler" style="z-index: 2;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse navbar-collapse"
-        id="navbarNav">
-        <ul class="navbar-nav text-center ms-auto">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" style="padding: 0 !important;" href="/">HOME</a>
+          </li>
           
             <li class="nav-item" data-path="/research/">
-              <a class="nav-link" href="/research/">RESEARCH</a>
+              <a class="nav-link" style="padding: 0 !important;" href="/research/">RESEARCH</a>
             </li>
           
             <li class="nav-item" data-path="/people/">
-              <a class="nav-link" href="/people/">PEOPLE</a>
+              <a class="nav-link" style="padding: 0 !important;" href="/people/">PEOPLE</a>
             </li>
           
             <li class="nav-item" data-path="/tags/">
-              <a class="nav-link" href="/tags/">NEWS</a>
+              <a class="nav-link" style="padding: 0 !important;" href="/tags/">NEWS</a>
             </li>
           
             <li class="nav-item" data-path="/publications/">
-              <a class="nav-link" href="/publications/">PUBLICATIONS</a>
+              <a class="nav-link" style="padding: 0 !important;" href="/publications/">PUBLICATIONS</a>
             </li>
           
         </ul>
       </div>
-
     </div>
   </nav>
 </div>
-
 
 <script src="/js/activeNav.js"></script>
 
@@ -522,7 +602,7 @@
     
     <div class="footer-more">
       
-        <a target="_blank" rel="noopener" href="https://github.com/MediaCompLab/MediaCompLab.github.io">Copyright © 2023 Media Comprehension Lab</a>
+        <a target="_blank" rel="noopener" href="https://github.com/MediaCompLab/MediaCompLab.github.io">Copyright © 2024 Media Comprehension Lab</a>
         
     </div>
   
@@ -738,17 +818,6 @@
 
 
         
-  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
-    <a href="javascript: void(0)">
-      <i id="theme-icon" class="iconfont icon-moon"></i>
-    </a>
-  </div>
-
-  
-<script src="/js/colorscheme.js"></script>
-
-
-
 
 
         
@@ -781,6 +850,6 @@
   </body>
 </html>
 
-<script type="text/javascript" src="js/particles.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<!-- <script type="text/javascript" src="js/particles.js"></script> -->
+<!-- <script type="text/javascript" src="js/app.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
