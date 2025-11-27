@@ -76,6 +76,7 @@
     <!-- <div id="particles-js" style="margin: 0; padding: 0; height: 100%; width: 100%; position: fixed;"></div> -->
     <div id="app">
       <style>
+#magic-line { display: none; }
 
 .navbar-toggler.collapsed ~ .navbar-collapse .navbar-nav {
   max-height: none;
@@ -129,6 +130,18 @@
   .nav-link {
     text-align: center; /* 让链接文字居中 */
   }
+
+  /* Mobile active state underline */
+  .nav-item.active .nav-link:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    border-bottom: 3px solid #CC0000;
+    width: 100%;
+    z-index: 2;
+  }
 }
 
 
@@ -145,30 +158,47 @@
     position: relative; /* 设置相对定位以支持绝对定位的伪元素 */
     display: inline-block; /* 确保链接的布局行为像块级元素一样 */
   }
+  
+  .navbar-nav {
+    position: relative;
+  }
 
+  #magic-line {
+    display: block;
+    position: absolute;
+    height: 3px;
+    bottom: -3px; /* initial fallback */
+    background-color: #CC0000;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+  }
+
+  /* 
   .navbar-nav .nav-link:hover:after {
-    content: ''; /* 伪元素的内容为空 */
-    position: absolute; /* 绝对定位 */
-    left: 0; /* 从链接的左边缘开始 */
-    right: 0; /* 伸展到链接的右边缘 */
-    bottom: -3px; /* 在链接底部下方显示，调整以符合具体布局 */
-    border-bottom: 3px solid rgb(255, 255, 255); /* 底部边框作为下划线 */
-    width: 100%; /* 确保宽度与父元素（链接）一致 */
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    bottom: -3px; 
+    border-bottom: 3px solid rgb(255, 255, 255); 
+    width: 100%; 
     z-index: 2;
   }
+  */
 
   
 }
-.nav-item.active .nav-link:after {
-  content: ''; /* 伪元素的内容为空 */
-  position: absolute; /* 绝对定位 */
-  left: 0; /* 从链接的左边缘开始 */
-  right: 0; /* 伸展到链接的右边缘 */
-  bottom: -3px; /* 在链接底部下方显示 */
-  border-bottom: 3px solid #CC0000; /* 红色底部边框作为下划线 */
-  width: 100%; /* 确保宽度与父元素（链接）一致 */
+/*.nav-item.active .nav-link:after {
+  content: ''; 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  bottom: -3px; 
+  border-bottom: 3px solid #CC0000; 
+  width: 100%; 
   z-index: 2;
-}
+}*/
 
 .nav-link {
   position: relative; /* 确保.nav-link支持绝对定位的子元素 */
@@ -210,6 +240,7 @@
               <a class="nav-link" style="padding: 0 !important;" href="/publications/">PUBLICATIONS</a>
             </li>
           
+          <li id="magic-line"></li>
         </ul>
       </div>
     </div>
@@ -237,6 +268,73 @@ VANTA.FOG({
   speed: 1.00,
   zoom: 0.50
 })
+
+document.addEventListener("DOMContentLoaded", function() {
+  const nav = document.querySelector('.navbar-nav');
+  const magicLine = document.getElementById('magic-line');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  
+  // Helper: find active item
+  function getActiveItem() {
+    return document.querySelector('.navbar-nav .nav-item.active .nav-link');
+  }
+
+  function setPosition(element, color) {
+    if (!element || !magicLine) return;
+    
+    const rect = element.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    
+    const relativeLeft = rect.left - navRect.left;
+    // Position top relative to nav
+    // Original CSS had bottom: -3px on nav-link. 
+    // We want the magic line to be at the same vertical position.
+    // Since nav-links are inline-block and aligned, we can just trust top/height.
+    const relativeTop = rect.top - navRect.top + rect.height; 
+
+    magicLine.style.width = `${rect.width}px`;
+    magicLine.style.left = `${relativeLeft}px`;
+    magicLine.style.top = `${relativeTop}px`; // Set explicit top
+    
+    if (color) {
+      magicLine.style.backgroundColor = color;
+    }
+  }
+
+  // Initial setup with delay to allow activeNav.js to run and layout to settle
+  window.addEventListener('load', function() {
+      const activeItem = getActiveItem();
+      if (activeItem) {
+          setPosition(activeItem, '#CC0000');
+      } else {
+          if (magicLine) magicLine.style.width = '0';
+      }
+  });
+
+  navLinks.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+          // Always Red
+          setPosition(link, '#CC0000');
+      });
+  });
+
+  if (nav) {
+    nav.addEventListener('mouseleave', function() {
+        const activeItem = getActiveItem();
+        if (activeItem) {
+            setPosition(activeItem, '#CC0000');
+        } else {
+            if (magicLine) magicLine.style.width = '0';
+        }
+    });
+  }
+  
+  // Handle resize
+  window.addEventListener('resize', function() {
+       const activeItem = getActiveItem();
+       if (activeItem) setPosition(activeItem, '#CC0000');
+  });
+});
 </script>
 
       <!-- margin-top because the navbar is fixed -->

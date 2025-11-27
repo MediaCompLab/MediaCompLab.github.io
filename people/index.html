@@ -81,6 +81,7 @@
     <!-- <div id="particles-js" style="margin: 0; padding: 0; height: 100%; width: 100%; position: fixed;"></div> -->
     <div id="app">
       <style>
+#magic-line { display: none; }
 
 .navbar-toggler.collapsed ~ .navbar-collapse .navbar-nav {
   max-height: none;
@@ -134,6 +135,18 @@
   .nav-link {
     text-align: center; /* 让链接文字居中 */
   }
+
+  /* Mobile active state underline */
+  .nav-item.active .nav-link:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    border-bottom: 3px solid #CC0000;
+    width: 100%;
+    z-index: 2;
+  }
 }
 
 
@@ -150,30 +163,47 @@
     position: relative; /* 设置相对定位以支持绝对定位的伪元素 */
     display: inline-block; /* 确保链接的布局行为像块级元素一样 */
   }
+  
+  .navbar-nav {
+    position: relative;
+  }
 
+  #magic-line {
+    display: block;
+    position: absolute;
+    height: 3px;
+    bottom: -3px; /* initial fallback */
+    background-color: #CC0000;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+  }
+
+  /* 
   .navbar-nav .nav-link:hover:after {
-    content: ''; /* 伪元素的内容为空 */
-    position: absolute; /* 绝对定位 */
-    left: 0; /* 从链接的左边缘开始 */
-    right: 0; /* 伸展到链接的右边缘 */
-    bottom: -3px; /* 在链接底部下方显示，调整以符合具体布局 */
-    border-bottom: 3px solid rgb(255, 255, 255); /* 底部边框作为下划线 */
-    width: 100%; /* 确保宽度与父元素（链接）一致 */
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    bottom: -3px; 
+    border-bottom: 3px solid rgb(255, 255, 255); 
+    width: 100%; 
     z-index: 2;
   }
+  */
 
   
 }
-.nav-item.active .nav-link:after {
-  content: ''; /* 伪元素的内容为空 */
-  position: absolute; /* 绝对定位 */
-  left: 0; /* 从链接的左边缘开始 */
-  right: 0; /* 伸展到链接的右边缘 */
-  bottom: -3px; /* 在链接底部下方显示 */
-  border-bottom: 3px solid #CC0000; /* 红色底部边框作为下划线 */
-  width: 100%; /* 确保宽度与父元素（链接）一致 */
+/*.nav-item.active .nav-link:after {
+  content: ''; 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  bottom: -3px; 
+  border-bottom: 3px solid #CC0000; 
+  width: 100%; 
   z-index: 2;
-}
+}*/
 
 .nav-link {
   position: relative; /* 确保.nav-link支持绝对定位的子元素 */
@@ -215,6 +245,7 @@
               <a class="nav-link" style="padding: 0 !important;" href="/publications/">PUBLICATIONS</a>
             </li>
           
+          <li id="magic-line"></li>
         </ul>
       </div>
     </div>
@@ -242,6 +273,73 @@ VANTA.FOG({
   speed: 1.00,
   zoom: 0.50
 })
+
+document.addEventListener("DOMContentLoaded", function() {
+  const nav = document.querySelector('.navbar-nav');
+  const magicLine = document.getElementById('magic-line');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  
+  // Helper: find active item
+  function getActiveItem() {
+    return document.querySelector('.navbar-nav .nav-item.active .nav-link');
+  }
+
+  function setPosition(element, color) {
+    if (!element || !magicLine) return;
+    
+    const rect = element.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    
+    const relativeLeft = rect.left - navRect.left;
+    // Position top relative to nav
+    // Original CSS had bottom: -3px on nav-link. 
+    // We want the magic line to be at the same vertical position.
+    // Since nav-links are inline-block and aligned, we can just trust top/height.
+    const relativeTop = rect.top - navRect.top + rect.height; 
+
+    magicLine.style.width = `${rect.width}px`;
+    magicLine.style.left = `${relativeLeft}px`;
+    magicLine.style.top = `${relativeTop}px`; // Set explicit top
+    
+    if (color) {
+      magicLine.style.backgroundColor = color;
+    }
+  }
+
+  // Initial setup with delay to allow activeNav.js to run and layout to settle
+  window.addEventListener('load', function() {
+      const activeItem = getActiveItem();
+      if (activeItem) {
+          setPosition(activeItem, '#CC0000');
+      } else {
+          if (magicLine) magicLine.style.width = '0';
+      }
+  });
+
+  navLinks.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+          // Always Red
+          setPosition(link, '#CC0000');
+      });
+  });
+
+  if (nav) {
+    nav.addEventListener('mouseleave', function() {
+        const activeItem = getActiveItem();
+        if (activeItem) {
+            setPosition(activeItem, '#CC0000');
+        } else {
+            if (magicLine) magicLine.style.width = '0';
+        }
+    });
+  }
+  
+  // Handle resize
+  window.addEventListener('resize', function() {
+       const activeItem = getActiveItem();
+       if (activeItem) setPosition(activeItem, '#CC0000');
+  });
+});
 </script>
 
       <!-- margin-top because the navbar is fixed -->
@@ -260,38 +358,44 @@ VANTA.FOG({
 
 .ourTeam .i {
     margin-top: 30px;
-    padding: 0 2rem;
+    padding: 0 1.5rem; /* Adjusted padding */
 }
 
 .ourTeam .i .c {
     background: var(--bg-block-md-table-2);;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+    border-radius: 2px; /* Soft rounded corners */
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     position: relative;
     overflow: hidden;
-    padding-bottom: 110px
+    padding-bottom: 0; /* Changed from 110px to 0 to let flex handle it or fixed height */
+    height: 420px; /* Fixed height for consistency */
+    width: 100%;   /* Fill wrapper */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth hover transition */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle initial shadow */
+    /* Removed border: 1px solid transparent */
 }
 
+/* Hover Effect - Lift & Shadow */
 .ourTeam .i .c:hover {
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.05) !important;
+    transform: translateY(-8px); /* Lift effect */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important; /* Deeper shadow */
+    /* Removed border-color change */
+    background: #fff; /* Brighten background */
 }
 
 .ourTeam .i .c .wrap {
     position: relative;
+    height: 100%; /* Use full height */
 }
 
 .ourTeam .i .c .wrap img {
     width: 100%;
-    /* -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px; */
+    height: 300px; /* Fixed image height */
+    object-fit: cover; /* Crop image nicely */
+    object-position: top; /* Focus on faces */
+    border-radius: 2px 2px 0 0; /* Top corners rounded */
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -ms-transition: all .3s ease;
@@ -299,48 +403,101 @@ VANTA.FOG({
 }
 
 .ourTeam .i .c .wrap .info {
-    padding: 30px 0;
+    padding: 20px 0;
     position: absolute;
-    top: 100%;
+    top: 300px; /* Match image height */
     width: 100%;
+    /* Ensure the info block is tall enough to cover the bottom */
+    height: 120px; /* 420px total - 300px image */
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -ms-transition: all .3s ease;
-    -o-transition: all .3s ease
+    -o-transition: all .3s ease;
+    background: var(--bg-block-md-table-2); /* Ensure background covers image if moved */
+    border: none !important; /* Fix for potential borders */
+    z-index: 5; /* Lower z-index */
+}
+
+/* Hover Interaction - Info Popup Logic */
+.ourTeam .i .c:hover .info {
+    top: 0; /* Move info to top */
+    padding-top: 60px; /* Add spacing */
+    background: rgba(255,255,255,0.95); /* Semi-transparent white overlay */
+    height: 100%; /* Full height cover */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 10; /* Bring to front */
+    border: none !important; /* Ensure no border on hover */
+}
+
+.ourTeam .i .c:hover img {
+    opacity: 0.3; /* Fade out image instead of hiding completely */
+    transform: scale(1.1); /* Subtle zoom on image */
 }
 
 .ourTeam .i .c .wrap .info .name {
     margin: 0;
     font-size: 24px;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    margin: 0 0 8px 0
+    margin: 0 0 8px 0;
+    color: #333;
+    transition: color 0.3s ease;
+    border-bottom: none !important; /* Fix unwanted underline */
+}
+
+.ourTeam .i .c:hover .info .name {
+    color: #333; /* Keep original grey on hover */
+}
+
+/* Remove all borders from links inside card */
+.ourTeam .i .c a {
+    border: none !important;
+    text-decoration: none !important;
 }
 
 .ourTeam .i .c .wrap .info .position {
     margin: 0;
     font-size: 14px;
-    font-size: 1.4rem;
-    color: var(--color-block-md-quote)
+    font-size: 1.3rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: none !important; /* Fix unwanted underline */
 }
 
 .ourTeam .i .c .more {
     position: absolute;
-    bottom: -100%;
+    bottom: -100%; /* Hidden by default */
     width: 100%;
+    height: auto; /* Allow content to dictate height */
+    min-height: 50%; /* Ensure it has some height */
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -ms-transition: all .3s ease;
-    -o-transition: all .3s ease
+    -o-transition: all .3s ease;
+    z-index: 20; /* Above info */
+    padding-bottom: 20px;
+    border: none !important; /* Fix unwanted borders */
+}
+
+/* Reveal More Info on Hover */
+.ourTeam .i .c:hover .more {
+    bottom: 0;
 }
 
 .ourTeam .i .c .more p {
-    margin: 0 18px 30px 18px;
-    line-height: 22px
+    margin: 0 20px 30px 20px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #444;
+    border: none !important;
 }
 
 .ourTeam .i .c .more .socials {
-    margin: 0 0 20px 0
+    margin: 0 0 20px 0;
+    border: none !important;
 }
 
 .ourTeam .i .c .more .socials a {
@@ -352,17 +509,19 @@ VANTA.FOG({
     font-size: 2.2rem;
     color: #fff;
     margin: 0 0 0 3px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+    -webkit-border-radius: 50%; /* Circle icons */
+    -moz-border-radius: 50%;
+    border-radius: 50%;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     text-align: center;
-    /* -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, .1);
-    -moz-box-shadow: 0 3px 0 rgba(0, 0, 0, .1);
-    box-shadow: 0 3px 0 rgba(0, 0, 0, .1) */
-    border: 0;
+    border: 0 !important; /* Ensure no border */
+    transition: transform 0.2s ease;
+}
+
+.ourTeam .i .c .more .socials a:hover {
+    transform: scale(1.2); /* Icon pop effect */
 }
 
 .ourTeam .i .c .more .socials a:first-child {
@@ -409,31 +568,15 @@ VANTA.FOG({
     background: #005580
 }
 
-.ourTeam .i .c:hover img {
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    -webkit-opacity: 0;
-    opacity: 0
-}
-
-.ourTeam .i .c:hover .info {
-    top: 0
-}
-
-.ourTeam .i .c:hover .more {
-    bottom: 0
-}
-
 .markdown-body img {
     max-width: 100%;
 }
 </style>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <div class="section ourTeam">
-    <div style="display:flex; flex-wrap:wrap; justify-content: center;">
-        <div class="i" style="width:28rem">
+    <div style="display:flex; flex-wrap:wrap; justify-content: center; gap: 20px;">
+        <div class="i" style="width: 300px; padding: 0;">
             <!-- <div class="c text-center shadow-sm"> -->
             <div class="c text-center">
                 <div class="wrap">
@@ -445,7 +588,7 @@ VANTA.FOG({
                     </div>
                 </div>
                 <div class="more">
-                    <p style="font-size:1.5rem">I’m most excited about our research on what is different about how we process and understand narratives that we  read in texts, look at in comics, and watch on TV and at the movies.</p>
+                    <p style="font-size:1rem; margin-bottom: 15px;">I’m most excited about our research on what is different about how we process and understand narratives that we  read in texts, look at in comics, and watch on TV and at the movies.</p>
                     <div class="socials">
                         <!-- <a href="#" title="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a> -->
                         <!-- <a href="#" title="#" class="twitter"><i class="fa fa-twitter"></i></a> -->
@@ -456,7 +599,7 @@ VANTA.FOG({
                 </div>
             </div>
         </div>
-        <div class="i" style="width:28rem">
+        <div class="i" style="width: 300px; padding: 0;">
             <div class="c text-center">
                 <div class="wrap">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="#" class="img-responsive" style="margin:0;">
@@ -473,7 +616,7 @@ VANTA.FOG({
                 </div>
             </div>
         </div>
-        <div class="i" style="width:28rem">
+        <div class="i" style="width: 300px; padding: 0;">
             <div class="c text-center">
                 <div class="wrap">
                     <img src="/images/virginia.jpg" alt="#" class="img-responsive" style="margin:0;">
@@ -490,7 +633,7 @@ VANTA.FOG({
                 </div>
             </div>
         </div>
-        <div class="i" style="width:28rem">
+        <div class="i" style="width: 300px; padding: 0;">
             <div class="c text-center">
                 <div class="wrap">
                     <img src="https://angushushu.com/images/head.png" alt="#" class="img-responsive" style="margin:0;">
@@ -507,7 +650,7 @@ VANTA.FOG({
                 </div>
             </div>
         </div>
-        <div class="i" style="width:28rem">
+        <div class="i" style="width: 300px; padding: 0;">
             <div class="c text-center">
                 <div class="wrap">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="#" class="img-responsive" style="margin:0;">
@@ -527,7 +670,7 @@ VANTA.FOG({
                 </div>
             </div>
         </div>
-        <div class="i" style="width:28rem">
+        <div class="i" style="width: 300px; padding: 0;">
             <div class="c text-center">
                 <div class="wrap">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="#" class="img-responsive" style="margin:0;">

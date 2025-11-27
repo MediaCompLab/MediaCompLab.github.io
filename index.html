@@ -81,6 +81,7 @@
     <!-- <div id="particles-js" style="margin: 0; padding: 0; height: 100%; width: 100%; position: fixed;"></div> -->
     <div id="app">
       <style>
+#magic-line { display: none; }
 
 .navbar-toggler.collapsed ~ .navbar-collapse .navbar-nav {
   max-height: none;
@@ -134,6 +135,18 @@
   .nav-link {
     text-align: center; /* 让链接文字居中 */
   }
+
+  /* Mobile active state underline */
+  .nav-item.active .nav-link:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    border-bottom: 3px solid #CC0000;
+    width: 100%;
+    z-index: 2;
+  }
 }
 
 
@@ -150,30 +163,47 @@
     position: relative; /* 设置相对定位以支持绝对定位的伪元素 */
     display: inline-block; /* 确保链接的布局行为像块级元素一样 */
   }
+  
+  .navbar-nav {
+    position: relative;
+  }
 
+  #magic-line {
+    display: block;
+    position: absolute;
+    height: 3px;
+    bottom: -3px; /* initial fallback */
+    background-color: #CC0000;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+  }
+
+  /* 
   .navbar-nav .nav-link:hover:after {
-    content: ''; /* 伪元素的内容为空 */
-    position: absolute; /* 绝对定位 */
-    left: 0; /* 从链接的左边缘开始 */
-    right: 0; /* 伸展到链接的右边缘 */
-    bottom: -3px; /* 在链接底部下方显示，调整以符合具体布局 */
-    border-bottom: 3px solid rgb(255, 255, 255); /* 底部边框作为下划线 */
-    width: 100%; /* 确保宽度与父元素（链接）一致 */
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    bottom: -3px; 
+    border-bottom: 3px solid rgb(255, 255, 255); 
+    width: 100%; 
     z-index: 2;
   }
+  */
 
   
 }
-.nav-item.active .nav-link:after {
-  content: ''; /* 伪元素的内容为空 */
-  position: absolute; /* 绝对定位 */
-  left: 0; /* 从链接的左边缘开始 */
-  right: 0; /* 伸展到链接的右边缘 */
-  bottom: -3px; /* 在链接底部下方显示 */
-  border-bottom: 3px solid #CC0000; /* 红色底部边框作为下划线 */
-  width: 100%; /* 确保宽度与父元素（链接）一致 */
+/*.nav-item.active .nav-link:after {
+  content: ''; 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  bottom: -3px; 
+  border-bottom: 3px solid #CC0000; 
+  width: 100%; 
   z-index: 2;
-}
+}*/
 
 .nav-link {
   position: relative; /* 确保.nav-link支持绝对定位的子元素 */
@@ -215,6 +245,7 @@
               <a class="nav-link" style="padding: 0 !important;" href="/publications/">PUBLICATIONS</a>
             </li>
           
+          <li id="magic-line"></li>
         </ul>
       </div>
     </div>
@@ -242,6 +273,73 @@ VANTA.FOG({
   speed: 1.00,
   zoom: 0.50
 })
+
+document.addEventListener("DOMContentLoaded", function() {
+  const nav = document.querySelector('.navbar-nav');
+  const magicLine = document.getElementById('magic-line');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  
+  // Helper: find active item
+  function getActiveItem() {
+    return document.querySelector('.navbar-nav .nav-item.active .nav-link');
+  }
+
+  function setPosition(element, color) {
+    if (!element || !magicLine) return;
+    
+    const rect = element.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    
+    const relativeLeft = rect.left - navRect.left;
+    // Position top relative to nav
+    // Original CSS had bottom: -3px on nav-link. 
+    // We want the magic line to be at the same vertical position.
+    // Since nav-links are inline-block and aligned, we can just trust top/height.
+    const relativeTop = rect.top - navRect.top + rect.height; 
+
+    magicLine.style.width = `${rect.width}px`;
+    magicLine.style.left = `${relativeLeft}px`;
+    magicLine.style.top = `${relativeTop}px`; // Set explicit top
+    
+    if (color) {
+      magicLine.style.backgroundColor = color;
+    }
+  }
+
+  // Initial setup with delay to allow activeNav.js to run and layout to settle
+  window.addEventListener('load', function() {
+      const activeItem = getActiveItem();
+      if (activeItem) {
+          setPosition(activeItem, '#CC0000');
+      } else {
+          if (magicLine) magicLine.style.width = '0';
+      }
+  });
+
+  navLinks.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+          // Always Red
+          setPosition(link, '#CC0000');
+      });
+  });
+
+  if (nav) {
+    nav.addEventListener('mouseleave', function() {
+        const activeItem = getActiveItem();
+        if (activeItem) {
+            setPosition(activeItem, '#CC0000');
+        } else {
+            if (magicLine) magicLine.style.width = '0';
+        }
+    });
+  }
+  
+  // Handle resize
+  window.addEventListener('resize', function() {
+       const activeItem = getActiveItem();
+       if (activeItem) setPosition(activeItem, '#CC0000');
+  });
+});
 </script>
 
       <!-- margin-top because the navbar is fixed -->
@@ -250,6 +348,11 @@ VANTA.FOG({
       
 
         <!-- 写作页 url形式：https://yoursite/writings/ -->
+<!-- Import Fredoka Font for Q-bouncy handwritten feel -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 #lab-name {
   width:60%;
@@ -261,19 +364,50 @@ VANTA.FOG({
   /* text-align: center; */
   align-items: start;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  font-family: 'Montserrat Light', sans-serif;
+  font-family: 'Fredoka', sans-serif; /* Updated font */
+  /* font-family: 'Montserrat Light', sans-serif; */
   /* font-family: 'Roboto', sans-serif; */
+  z-index: 10; /* Ensure text is above carousel controls if needed */
+  pointer-events: none; /* Allow clicking through the text to the carousel */
 }
+
+/* Interactive Logo */
+#lab-name img {
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy effect */
+  cursor: pointer;
+  pointer-events: auto; /* Re-enable pointer events for the image */
+}
+#lab-name img:hover {
+  transform: translateY(-20px) scale(1.1); /* Jump/Bounce effect */
+}
+
 .boldy {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Fredoka', sans-serif; /* Updated font */
+  /* font-family: 'Montserrat', sans-serif; */
   /* font-family: 'Roboto', sans-serif; */
-  font-weight: bold;
+  font-weight: 600; /* Adjusted weight for Fredoka */
 }
 #name-txt {
   text-align: start;
   font-size: 4.6rem;
   width: auto;
+  pointer-events: auto; /* Re-enable pointer events for text interaction */
 }
+
+/* Interactive Text Characters */
+.char {
+  display: inline-block;
+  transition: all 0.2s ease;
+  cursor: default;
+  position: relative;
+  color: #ffffff;
+}
+.char:hover {
+  transform: translateY(-15px) scale(1.3) rotate(5deg);
+  /* Color effect removed as requested */
+  z-index: 10;
+}
+
 @media (max-width: 888px) {
   #lab-name {
     font-size:small !important;
@@ -293,10 +427,23 @@ VANTA.FOG({
 
 .carousel-item {
   height: 500px; /* 或者你需要的任何高度 */
+  overflow: hidden; /* Important for zoom effect */
+  transition: transform 1.6s ease-in-out; /* Slower, smoother slide transition */
 }
 
 .carousel-item img {
   object-fit: cover; /* 这会使图片填充整个轮播项区域，而不变形 */
+  transition: transform 1s ease-in-out; /* Basic smoothness */
+}
+
+/* Ken Burns Zoom Effect */
+@keyframes zoomEffect {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.carousel-item.active img {
+  animation: zoomEffect 6s linear forwards;
 }
 
 /* 确保轮播图容器是相对定位的 */
@@ -329,13 +476,58 @@ div.carousel.slide {
   padding-bottom: 0 !important;
 }
 
+/* Elegant Controls */
+.carousel-control-prev, .carousel-control-next {
+  width: 6%;
+  opacity: 0; /* Hidden by default for cleaner look */
+  transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: 1; /* Show on hover */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgba(0,0,0,0.4); /* Soft dark bubble */
+  border-radius: 50%;
+  padding: 15px;
+  background-size: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  backdrop-filter: blur(4px); /* Frosted glass effect */
+}
+
+/* Elegant Indicators */
+.carousel-indicators {
+  margin-bottom: 1.5rem;
+}
+
+.carousel-indicators button {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  margin: 0 6px !important;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: #fff !important;
+  transform: scale(1.3);
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
 </style>
 
 
 
 <div style="position: relative; color: white; border-radius: 0px; background-color:black; overflow: hidden; height:auto;">
   <!-- <img style='margin:0; max-width: 100%;' src="images/team1.jpeg" alt="Lab"></img> -->
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -375,7 +567,13 @@ div.carousel.slide {
     <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
       <img src="/images/icon_white.png" style="height: 100px; padding: 0 5px 20px 0;">
       </img>
-      <h1 id="name-txt" style="display: block;"><span class="boldy" style="color: #ffffff;">M</span>edia <span class="boldy" style="color: #ffffff;"">C</span>omprehension <span class="boldy" style="color: #ffffff;">Lab</span></h1>
+      <h1 id="name-txt" style="display: block;">
+        <span class="char boldy">M</span><span class="char">e</span><span class="char">d</span><span class="char">i</span><span class="char">a</span>
+        &nbsp;
+        <span class="char boldy">C</span><span class="char">o</span><span class="char">m</span><span class="char">p</span><span class="char">r</span><span class="char">e</span><span class="char">h</span><span class="char">e</span><span class="char">n</span><span class="char">s</span><span class="char">i</span><span class="char">o</span><span class="char">n</span>
+        &nbsp;
+        <span class="char boldy">L</span><span class="char boldy">a</span><span class="char boldy">b</span>
+      </h1>
     </div>
     
   </div>
@@ -410,7 +608,20 @@ div.carousel.slide {
     background: #fafafa;            /* 极淡的灰背景，可选 */
     padding-top: 10px;
     padding-bottom: 10px;
+    border-radius: 0 2px 2px 0;     /* 右侧圆角 */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 平滑过渡 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 初始轻微阴影 */
 }
+
+/* 鼠标悬停效果 */
+.research-card:hover {
+    transform: translateY(-5px) translateX(5px); /* 轻微上浮和右移 */
+    box-shadow: 5px 15px 25px rgba(0,0,0,0.1);   /* 投影加深 */
+    background: #ffffff;                         /* 背景变亮 */
+    border-left-color:rgb(255, 0, 0);                  /* 边框颜色变更为活力橙，呼应主题 */
+    border-left-width: 6px;                      /* 边框变宽 */
+}
+
 .card-title {
     font-weight: bold;
     display: block;                 /* 让 First 独占一行，更清晰 */
@@ -419,6 +630,11 @@ div.carousel.slide {
     text-transform: uppercase;      /* 全大写显得更正式 */
     font-size: 0.85rem;
     letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.research-card:hover .card-title {
+    color:rgb(255, 0, 0); /* 标题颜色也随之改变 */
 }
 </style>
 
@@ -447,6 +663,7 @@ div.carousel.slide {
 
   </div>
 </div>
+
         
 <div class="footer">
   <div class="social">
