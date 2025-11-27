@@ -1,57 +1,66 @@
 /* light scheme */
 :root[color-mode="light"] {
-  --bg-body: #f3e8dc;
-  --color-text-base: #666;
+  --bg-body: #f9f8f4; 
+  --bg-color: #f4f0e6;
+  --color-text-base: #2c2c2c;
+  --color-text-sub: #5f5f5f;
+  --color-text-md-title: #1a1a1a;
+  --color-text-md-content: #2c2c2c;
   --color-text-a: #666;
   --color-text-a-hover: #000000;
   --color-text-a-active: #000000;
-  --color-text-sub: #8e8e8e;
-  --color-text-md-title: #24292e;
-  --color-text-md-content: #24292e;
   --color-text-md-code: #CC0000;
   --bg-text-md-code: #f8f8f8;
   --bg-block-md-quote: #EEEEEE;
   --color-block-md-quote: #555555;
-  --color-divider-md-border: #5858581a;
-  --bg-content-search: rgba(255, 255, 255, 0.8);
-  --bg-block-md-pre: #e6e6e6;
-  --color-text-md-pre: #555555;
-  --bg-block-md-table: #f3e8dc;
-  --bg-block-md-table-2: #f7efe8;
-  --color-border-md-table: #dfe2e5;
-  /* for website */
-  --bar-color: #ffffff;
-  --bar-color-active: rgb(255, 255, 255);
-  --bg-color: #f3f7ff;
-  --bar-txt: #ffffff;
-  --bar-txt-active: #ffffff;
+  --color-divider-md-border: #e0ded5;
+  --bg-content-search: #ffffff;
+  --bg-block-md-pre: #efebe0;
+  --color-text-md-pre: #2c2c2c;
+  --bg-block-md-table: #ffffff;
+  --bg-block-md-table-2: #faf8f5;
+  --color-border-md-table: #dcd9ce;
+  --bar-color: #f9f8f4;
+  --bar-color-active: #eae6da;
+  --bar-txt: #575551;
+  --bar-txt-active: #575551;
 }
 
 /* dark scheme */
 :root[color-mode="dark"] {
-  --bg-body: #2E3440;
-  --color-text-base: #C1C2C5;
-  --color-text-a: #C1C2C5;
-  --color-text-a-hover: #FFFFFF;
-  --color-text-a-active: #FFFFFF;
-  --color-text-sub: #8e8e8e;
-  --color-text-md-title: #eceff4;
-  --color-text-md-content: #eceff4;
-  --color-text-md-code: #e96900;
-  --bg-text-md-code: #3b4252;
-  --bg-block-md-quote: #3a4252;
-  --color-block-md-quote: #abb9cf;
-  --color-divider-md-border: #ffffff4f;
-  --bg-content-search: rgb(59 66 82 / 60%);
-  --bg-block-md-pre: #3a4252;
-  --color-text-md-pre: #abb9cf;
-  --bg-block-md-table: #2E3440;
-  --bg-block-md-table-2: #313744;
-  --color-border-md-table: #4c566a;
-  /* for website */
-  --bar-color: #ffffff;
-  --bar-color-active: rgba(0, 0, 0, 0.05);
-  --bg-color: #3a3a3a;
-  --bar-txt: #000e24cb;
-  --bar-txt-active: #000000;
+  --bg-body: #f9f8f4; 
+  --bg-color: #f4f0e6; /* 侧边或强调背景稍深一点 */
+
+  /* --- 文字：深炭灰色，比纯黑柔和 --- */
+  --color-text-base: #2c2c2c;
+  --color-text-sub: #5f5f5f;
+  --color-text-md-title: #1a1a1a;
+  --color-text-md-content: #2c2c2c;
+
+  /* --- 链接：深赭石色/砖红色 (作为强调色，呼应Logo里的红色) --- */
+  --color-text-a: #666;
+  --color-text-a-hover: #000000;
+  --color-text-a-active: #000000;
+
+  /* --- 代码与引用 --- */
+  --color-text-md-code: #CC0000;
+  --bg-text-md-code: #f8f8f8;
+  --bg-block-md-quote: #EEEEEE;
+  --color-block-md-quote: #555555;
+  
+  --color-divider-md-border: #e0ded5;
+  --bg-content-search: #ffffff;
+
+  /* --- 表格 --- */
+  --bg-block-md-pre: #efebe0;
+  --color-text-md-pre: #2c2c2c;
+  --bg-block-md-table: #ffffff;
+  --bg-block-md-table-2: #faf8f5;
+  --color-border-md-table: #dcd9ce;
+
+  /* --- 导航栏 --- */
+  --bar-color: #f9f8f4;
+  --bar-color-active: #eae6da;
+  --bar-txt: #575551;
+  --bar-txt-active: #575551;
 }

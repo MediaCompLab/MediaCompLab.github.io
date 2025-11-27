@@ -86,6 +86,10 @@
   max-height: none;
 }
 
+.navbar-box-shadow {
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.4) !important; /* 增加阴影 */
+}
+
 .navbar {
   background-color: #b9b6a4;
   height: auto !important; /* 自动根据内容调整高度 */
@@ -184,7 +188,7 @@
       <img src="/images/cehd-white2.png" alt="School Logo" style="height: 100px;">
     </a>
   </div>
-  <nav class="navbar navbar-expand-lg navbar-custom shadow-sm" style="background-color: #b9b6a4; padding: 0 8%;">
+  <nav class="navbar navbar-expand-lg navbar-custom navbar-box-shadow" style="background-color: #b9b6a4; padding: 0 8%; z-index: 10; position: relative;">
     <div class="container-fluid justify-content-center">
       <button class="navbar-toggler" style="z-index: 2;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -258,9 +262,11 @@ VANTA.FOG({
   align-items: start;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   font-family: 'Montserrat Light', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
 }
 .boldy {
   font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-weight: bold;
 }
 #name-txt {
@@ -369,7 +375,7 @@ div.carousel.slide {
     <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
       <img src="/images/icon_white.png" style="height: 100px; padding: 0 5px 20px 0;">
       </img>
-      <h1 id="name-txt" style="display: block;"><span class="boldy" style="color: #0084ff;">M</span>edia <span class="boldy" style="color: #ff583a;"">C</span>omprehension <span class="boldy" style="color: #ffffff;">Lab</span></h1>
+      <h1 id="name-txt" style="display: block;"><span class="boldy" style="color: #ffffff;">M</span>edia <span class="boldy" style="color: #ffffff;"">C</span>omprehension <span class="boldy" style="color: #ffffff;">Lab</span></h1>
     </div>
     
   </div>
@@ -377,14 +383,14 @@ div.carousel.slide {
 <div class="container about-index">
   <div class="markdown-body">
     <style>
-.link {
-    color: #4f8aff !important;
+/* .link {
+    color: #eae6da !important;
     text-decoration: none !important;
     border-bottom: none !important;
 }
 .link:hover {
     font-weight: bold !important;
-}
+} */
 #head {
   transition: transform .5s ease-in-out;
 }
@@ -397,6 +403,23 @@ div.carousel.slide {
     display: flex;
     align-items: flex-end
 }
+.research-card {
+    border-left: 4px solid #eae6da; /* 左侧蓝线 */
+    padding-left: 15px;             /* 文字离线的距离 */
+    margin-bottom: 20px;            /* 段落间距 */
+    background: #fafafa;            /* 极淡的灰背景，可选 */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.card-title {
+    font-weight: bold;
+    display: block;                 /* 让 First 独占一行，更清晰 */
+    margin-bottom: 5px;
+    color: #444;
+    text-transform: uppercase;      /* 全大写显得更正式 */
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
 </style>
 
 <!-- <div style="border-radius: 5px; background-color:black; overflow: hidden; height:auto;">
@@ -405,9 +428,22 @@ div.carousel.slide {
 
 <!-- # Media Comprehension Laboratory -->
 
-<h4 id="The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano-which-studies-three-areas-of-research"><a href="#The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano-which-studies-three-areas-of-research" class="headerlink" title="The Media Comprehension Lab is directed by Joe Magliano, which studies three areas of research:"></a>The Media Comprehension Lab is directed by <a target="_blank" rel="noopener" href="https://education.gsu.edu/profile/joe-magliano/">Joe Magliano</a>, which studies three areas of research:</h4><p><span class="badge bg-dark text-light" style="font-size:1.5rem;border-radius:0px;">First</span> we experience information across a variety of media, such as texts, comics, and TV&#x2F;Movies. We study how adults make sense of different media and what is common and unique about those experiences. </p>
-<p><span class="badge bg-dark text-light" style="font-size:1.5rem;border-radius:0px;">Second</span> adults vary in many ways that help them become successful with processing media.  This variability has implications for being prepared for college, the work force, and lifelong learning.  We study what makes adults ready to make sense of media in these contexts.</p>
-<p><span class="badge bg-dark text-light" style="font-size:1.5rem;border-radius:0px;">Third</span> we learn about how adults make sense of media by having them write or talk about their understanding texts, comics, or movie&#x2F;tv shows, which are called constructed responses. We use computational methodologies to make sense of constructed responses to learn about how they make sense of different media.</p>
+<h4 id="The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano-which-studies-three-areas-of-research"><a href="#The-Media-Comprehension-Lab-is-directed-by-Joe-Magliano-which-studies-three-areas-of-research" class="headerlink" title="The Media Comprehension Lab is directed by Joe Magliano, which studies three areas of research:"></a>The Media Comprehension Lab is directed by <a target="_blank" rel="noopener" href="https://education.gsu.edu/profile/joe-magliano/">Joe Magliano</a>, which studies three areas of research:</h4><div class="research-card">
+    <span class="card-title">TOPIC 1</span>
+    we experience information across a variety of media, such as texts, comics, and TV/Movies. We study how adults make sense of different media and what is common and unique about those experiences. 
+</div>
+
+<div class="research-card">
+    <span class="card-title">TOPIC 2</span>
+    adults vary in many ways that help them become successful with processing media.  This variability has implications for being prepared for college, the work force, and lifelong learning.  We study what makes adults ready to make sense of media in these contexts.
+</div>
+
+<div class="research-card">
+    <span class="card-title">TOPIC 3</span>
+    we learn about how adults make sense of media by having them write or talk about their understanding texts, comics, or movie/tv shows, which are called constructed responses. We use computational methodologies to make sense of constructed responses to learn about how they make sense of different media.
+</div>
+
+
 
   </div>
 </div>
@@ -434,7 +470,7 @@ div.carousel.slide {
     
     <div class="footer-more">
       
-        <a target="_blank" rel="noopener" href="https://github.com/MediaCompLab/MediaCompLab.github.io">Copyright © 2024 Media Comprehension Lab</a>
+        <a target="_blank" rel="noopener" href="https://github.com/MediaCompLab/MediaCompLab.github.io">Copyright © 2025 Media Comprehension Lab</a>
         
     </div>
   
@@ -660,12 +696,12 @@ div.carousel.slide {
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Home + '&url=' + https%3A%2F%2Fmediacomplab.github.io%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Home + '&url=' + https%3A%2F%2Fmediacomplab.com%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://mediacomplab.github.io/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://mediacomplab.com/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
