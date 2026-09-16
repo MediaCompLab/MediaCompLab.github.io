@@ -1,0 +1,88 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import Comments from '../../../../components/Comments.astro';
+import Icon from '../../../../components/Icon.astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getPostsNewestFirst, neighbours, newsLink, postPath, postTags } from '../../../../utils/content';
+import { absoluteUrl, formatDate, getDateParts, pad2 } from '../../../../utils/url';
+
+/** `permalink: :year/:month/:day/:title/` — the same URLs the Hexo site had. */
+export async function getStaticPaths() {
+	const posts = await getPostsNewestFirst();
+
+	return posts.map((post, index) => {
+		const { year, month, day } = getDateParts(post.data.date ?? 0);
+		const { prev: newer, next: older } = neighbours(posts, index);
+		return {
+			params: {
+				year: String(year),
+				month: pad2(month),
+				day: pad2(day),
+				slug: post.id,
+			},
+			props: { post, newer, older },
+		};
+	});
+}
+
+type Props = {
+	post: CollectionEntry<'posts'>;
+	newer?: CollectionEntry<'posts'>;
+	older?: CollectionEntry<'posts'>;
+};
+
+const { post, newer, older } = Astro.props as Props;
+const { Content } = await render(post);
+const permalink = absoluteUrl(postPath(post));
+const tags = postTags(post);
+const hasBody = (post.body ?? '').trim().length > 0;
+---
+
+<BaseLayout title={post.data.title} permalink={permalink} shareTitle={post.data.title}>
+	<article>
+		<section class="section">
+			<div class="container">
+				<header class="post-header">
+					<h1>{post.data.title}</h1>
+					<div class="post-header__meta">
+						<span>
+							<Icon name="calendar" size={16} />
+							{formatDate(post.data.date ?? 0)}
+						</span>
+						{tags.map((tag) => (
+							<a class="tag-chip" href={`/tags/${encodeURIComponent(tag.replace(/ /g, '-'))}/`}>#{tag}</a>
+						))}
+					</div>
+				</header>
+
+				{hasBody && (
+					<div class="markdown-body">
+						<Content />
+					</div>
+				)}
+
+				{(newer || older) && (
+					<nav class="post-nav" aria-label="More updates">
+						{older ? (
+							<a class="post-nav__link post-nav__link--prev" href={postPath(older)}>
+								<span class="post-nav__label">Previous</span>
+								<span class="post-nav__title">{newsLink(older).text}</span>
+							</a>
+						) : (
+							<span />
+						)}
+						{newer && (
+							<a class="post-nav__link post-nav__link--next" href={postPath(newer)}>
+								<span class="post-nav__label">Next</span>
+								<span class="post-nav__title">{newsLink(newer).text}</span>
+							</a>
+						)}
+					</nav>
+				)}
+			</div>
+		</section>
+	</article>
+
+	<Comments />
+</BaseLayout>

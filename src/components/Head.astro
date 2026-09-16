@@ -1,0 +1,79 @@
+---
+import { SITE, THEME } from '../consts';
+
+/**
+ * Contents of <head> for every page.
+ *
+ * Fonts: Inter for UI and body text, Source Serif 4 for display headings.
+ * Font Awesome is kept only for brand marks
+ * (GitHub, LinkedIn, ResearchGate, X, Facebook); all site chrome uses inline
+ * SVG, so the old at.alicdn.com icon font is gone.
+ */
+type Props = {
+	/** Page title, without the site name. */
+	title?: string;
+	description?: string;
+	noindex?: boolean;
+};
+
+const {
+	title,
+	description = 'The Media Comprehension Lab at Georgia State University studies how people understand texts, comics, film and television.',
+	noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · Media Comprehension Lab` : 'Media Comprehension Lab';
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://mediacomplab.com').href;
+const socialImage = new URL('/images/team1.jpeg', Astro.site ?? 'https://mediacomplab.com').href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+{SITE.author && <meta name="author" content={SITE.author} />}
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Media Comprehension Lab" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={socialImage} />
+<meta name="twitter:card" content="summary_large_image" />
+
+{THEME.favicon.enable && (
+	<>
+		<link rel="apple-touch-icon" href={THEME.favicon.touchIcon} />
+		<link rel="icon" href={THEME.favicon.icon} />
+	</>
+)}
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{/* Two faces only: Inter for everything, Fredoka for the lab wordmark. */}
+<link
+	href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
+	rel="stylesheet"
+/>
+<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	referrerpolicy="no-referrer"
+/>
+
+{THEME.gtag.enable && (
+	<>
+		<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${THEME.gtag.key}`}></script>
+		<script
+			is:inline
+			set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${THEME.gtag.key}');`}
+		/>
+	</>
+)}
+
+<meta name="generator" content={Astro.generator} />

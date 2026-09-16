@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import { THEME } from '../consts';
+
+/**
+ * Floating action stack: search, share (posts only) and back-to-top.
+ *
+ * Back-to-top hides itself until the page is scrolled; the search button opens
+ * the overlay below.
+ */
+type Props = {
+	permalink?: string;
+	pageTitle?: string;
+};
+
+const { permalink, pageTitle = '' } = Astro.props;
+const shareEnabled = THEME.postShare.enable && Boolean(permalink);
+
+/** The theme's share templates were malformed; kept as-is so links behave the same. */
+const twitterHref = `https://twitter.com/intent/tweet?text=' + ${encodeURIComponent(
+	pageTitle,
+)} + '&url=' + ${encodeURIComponent(permalink ?? '')} + '`;
+const facebookHref = `https://www.facebook.com/sharer.php?u=${permalink}`;
+---
+
+<div class="tools">
+	{shareEnabled && (
+		<>
+			<button class="tool" type="button" id="share-toggle" aria-expanded="false" aria-controls="share-menu">
+				<Icon name="share" size={19} />
+				<span class="visually-hidden">Share</span>
+			</button>
+			<div class="share-menu" id="share-menu" hidden>
+				{THEME.postShare.twitter.enable && (
+					<a href={twitterHref} target="_blank" rel="noopener" title="Twitter">
+						<i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+						<span>Twitter</span>
+					</a>
+				)}
+				{THEME.postShare.facebook.enable && (
+					<a href={facebookHref} target="_blank" rel="noopener" title="Facebook">
+						<i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+						<span>Facebook</span>
+					</a>
+				)}
+			</div>
+		</>
+	)}
+
+	{THEME.search.enable && (
+		<button class="tool" type="button" id="search-toggle" aria-expanded="false" aria-controls="search-overlay">
+			<Icon name="search" size={19} />
+			<span class="visually-hidden">Search</span>
+		</button>
+	)}
+
+	<button class="tool is-hidden" type="button" id="back-to-top">
+		<Icon name="arrow-up" size={19} />
+		<span class="visually-hidden">Back to top</span>
+	</button>
+</div>

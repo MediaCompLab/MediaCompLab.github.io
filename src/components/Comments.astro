@@ -1,0 +1,36 @@
+---
+import { SITE, THEME } from '../consts';
+
+/**
+ * Valine comments, carried over from the Hexo theme. Only rendered when the
+ * theme config enables it, so the old behaviour is preserved.
+ */
+---
+
+{THEME.comments.enable && THEME.comments.valine.enable && (
+	<section class="comments section--soft section">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">Discussion</span>
+				<h2>Comments</h2>
+			</div>
+			<div id="vcomments"></div>
+		</div>
+	</section>
+
+	<script is:inline src={THEME.cdns.comments.valine.enable ? THEME.cdns.comments.valine.url : '/plugins/valine.min.js'}></script>
+	<script
+		is:inline
+		set:html={`window.addEventListener('load', function () {
+  if (typeof Valine !== 'function') return;
+  new Valine({
+    el: '#vcomments',
+    appId: '${THEME.comments.valine.appId}',
+    appKey: '${THEME.comments.valine.appKey}',
+    placeholder: '${THEME.comments.valine.placeholder}',
+    avatar: '${THEME.comments.valine.avatar}',
+    lang: '${SITE.language}'
+  });
+});`}
+	/>
+)}

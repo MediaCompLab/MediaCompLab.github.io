@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EXPLICIT_PAGE_IDS, pagePath } from '../utils/content';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import { absoluteUrl } from '../utils/url';
+
+/**
+ * Every page under src/content/pages except the ones with a dedicated route
+ * file. Each page owns its own section markup, so there is nothing to wrap here.
+ */
+export async function getStaticPaths() {
+	const pages = await getCollection('pages');
+
+	return pages
+		.filter((page) => !EXPLICIT_PAGE_IDS.has(page.id))
+		.map((page) => ({
+			// `people/index` -> `/people/`, `people/virginia` -> `/people/virginia`.
+			params: { slug: pagePath(page).replace(/^\/|\/$/g, '') },
+			props: { page },
+		}));
+}
+
+type Props = { page: CollectionEntry<'pages'> };
+
+const { page } = Astro.props as Props;
+const { Content } = await render(page);
+const title = page.data.title ?? undefined;
+---
+
+<BaseLayout title={title} permalink={absoluteUrl(pagePath(page))} shareTitle={title ?? ''}>
+	<Content />
+</BaseLayout>

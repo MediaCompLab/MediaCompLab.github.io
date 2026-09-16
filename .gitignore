@@ -1,0 +1,33 @@
+# build output
+dist/
+.astro/
+
+# visual-diff scratch screenshots (kept when run with --keep)
+.visual-diff/
+
+# ad-hoc page screenshots
+.shots/
+
+# reference build for `npm run verify` (created by `npm run snapshot`)
+.baseline/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea/

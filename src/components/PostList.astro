@@ -1,0 +1,25 @@
+---
+import EntryRow from './EntryRow.astro';
+import type { PostEntry } from '../utils/content';
+
+/**
+ * The news list, shared by the home page, the news index and the tag pages.
+ *
+ * It used to take a `groupByYear` flag for the archives page, which was the only
+ * caller; that page has been removed, so the flag went with it rather than
+ * sitting here unused.
+ */
+type Props = {
+	posts: PostEntry[];
+};
+
+const { posts } = Astro.props;
+
+const sorted = [...posts].sort(
+	(a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+);
+---
+
+<ul class="entry-list">
+	{sorted.map((post) => <EntryRow post={post} />)}
+</ul>

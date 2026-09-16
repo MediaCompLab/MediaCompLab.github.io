@@ -1,0 +1,19 @@
+---
+import PostList from '../../components/PostList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPostsNewestFirst } from '../../utils/content';
+import { absoluteUrl } from '../../utils/url';
+
+// Kept for parity with the Hexo build, which wrote the paginated index here so
+// that source/index.md could own `/`. Not linked from the site.
+const posts = await getPostsNewestFirst();
+---
+
+<BaseLayout title="Updates" permalink={absoluteUrl('/default-index/')} noindex>
+	<section class="section">
+		<div class="container">
+			<h1 class="visually-hidden">Updates</h1>
+			<PostList posts={posts} />
+		</div>
+	</section>
+</BaseLayout>

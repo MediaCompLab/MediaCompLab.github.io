@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import { THEME } from '../consts';
+
+/** Search overlay. All behaviour lives in src/scripts/site.js. */
+---
+
+<div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search the site">
+	<div class="search-panel">
+		<div class="search-field">
+			<Icon name="search" size={20} />
+			<input
+				class="search-input"
+				id="search-input"
+				type="search"
+				placeholder={THEME.search.placeholder || 'Search news, people, publications…'}
+				autocomplete="off"
+				spellcheck="false"
+			/>
+			<button class="search-close" type="button" id="search-close">
+				<Icon name="close" size={18} />
+				<span class="visually-hidden">Close search</span>
+			</button>
+		</div>
+		<div class="search-results" id="search-results">
+			<p class="search-empty">Start typing to search the lab site.</p>
+		</div>
+	</div>
+</div>

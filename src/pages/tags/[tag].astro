@@ -1,0 +1,67 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+	getPostsNewestFirst,
+	getTagsAlphabetical,
+	newsLink,
+	postTags,
+} from '../../utils/content';
+import { formatDate } from '../../utils/url';
+
+/** One page per tag — the filtered view of the news list. */
+export async function getStaticPaths() {
+	const tags = await getTagsAlphabetical();
+	const posts = await getPostsNewestFirst();
+
+	return tags.map((tag) => ({
+		params: { tag: tag.slug },
+		props: {
+			tag: tag.name,
+			posts: posts.filter((post) => postTags(post).includes(tag.name)),
+		},
+	}));
+}
+
+type Props = { tag: string; posts: Awaited<ReturnType<typeof getPostsNewestFirst>> };
+
+const { tag, posts } = Astro.props as Props;
+const sorted = [...posts].sort(
+	(a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+);
+---
+
+<BaseLayout
+	title={`${tag} — News`}
+	description={`News tagged ${tag} from the Media Comprehension Lab.`}
+	shareTitle={`News: ${tag}`}
+>
+	<section class="section">
+		<div class="container">
+			<header class="page-head">
+				<p class="eyebrow"><a href="/tags/">News</a></p>
+				<h1 class="page-head__title">{tag}</h1>
+			</header>
+
+			<ul class="entry-list">
+				{sorted.map((post) => {
+					const link = newsLink(post);
+					return (
+						<li class="entry">
+							<a
+								class="entry__link"
+								href={link.href}
+								target={link.external ? '_blank' : undefined}
+								rel={link.external ? 'noopener' : undefined}
+							>
+								<span class="entry__date">{formatDate(post.data.date ?? 0)}</span>
+								<span class="entry__title">{link.text}</span>
+								<Icon name="arrow-right" size={17} class="entry__arrow" />
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

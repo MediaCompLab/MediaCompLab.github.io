@@ -1,0 +1,34 @@
+{
+  "name": "mediacomplab.github.io",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/check-content.mjs && astro build && node scripts/postbuild.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "verify": "node scripts/verify-against-hexo.mjs",
+    "snapshot": "node scripts/snapshot.mjs",
+    "visual-diff": "node scripts/visual-diff.mjs",
+    "hover-preview": "node scripts/hover-preview.mjs",
+    "touch-preview": "node scripts/touch-preview.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.2.2",
+    "nunjucks": "^3.2.4",
+    "remark-breaks": "^4.0.0",
+    "unist-util-visit": "^5.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.20.3",
+    "@types/nunjucks": "^3.2.6",
+    "pngjs": "^7.0.0",
+    "typescript": "^6.0.3"
+  }
+}

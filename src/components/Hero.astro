@@ -1,0 +1,99 @@
+---
+import Icon from './Icon.astro';
+
+/** Photo-led home hero, with the lab identity in a separate editorial band. */
+type Slide = { src: string; alt: string };
+
+const slides: Slide[] = [
+	{ src: '/images/team1.jpeg', alt: 'The lab together at a cookout' },
+	{ src: '/images/team2.jpeg', alt: 'The lab together outdoors' },
+	{ src: '/images/football.jpg', alt: 'Lab outing at a football game' },
+	{ src: '/images/football2.jpg', alt: 'Lab outing at a football game' },
+	{ src: '/images/genre_study.jpg', alt: 'Working session for the genre study' },
+];
+
+const LAB_NAME = 'Media Comprehension Lab';
+const INTERVAL = 6000;
+
+/** Per-letter stagger for the hero title entrance. */
+let charDelay = 0;
+
+---
+
+<section class="hero" id="hero" data-interval={INTERVAL}>
+	<div class="hero__viewport">
+		{slides.map((slide, i) => (
+			<div class:list={['hero__slide', { 'is-active': i === 0 }]} data-slide={i}>
+				<img
+					src={slide.src}
+					alt={slide.alt}
+					loading={i === 0 ? 'eager' : 'lazy'}
+					fetchpriority={i === 0 ? 'high' : 'auto'}
+					decoding="async"
+				/>
+			</div>
+		))}
+
+
+		{/* The controls stay out of the picture until they are wanted: the counter
+		    and pause switch fade in when the pointer is anywhere over the hero,
+		    and each arrow only when the pointer is at its own edge. There is no
+		    hover on touch, so swiping steps the carousel instead — see
+		    src/scripts/site.js. */}
+		<div class="hero__controls">
+			<span class="hero__count" aria-hidden="true" data-photo-count>01 / 05</span>
+			<button class="hero__motion" type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button>
+		</div>
+
+		<button class="hero__arrow hero__arrow--prev" type="button" data-hero="prev">
+			<Icon name="chevron-left" size={20} />
+			<span class="visually-hidden">Previous photo</span>
+		</button>
+		<button class="hero__arrow hero__arrow--next" type="button" data-hero="next">
+			<Icon name="chevron-right" size={20} />
+			<span class="visually-hidden">Next photo</span>
+		</button>
+	</div>
+
+		<div class="hero__content">
+			<div class="container">
+				{/* Mark and wordmark on one row, as the Hexo `#lab-name` was a flex row
+				    of the white icon and the h1. */}
+				<div class="hero__identity">
+					<img class="hero__mark" src="/images/icon_white.png" alt="" width="54" height="62" />
+					<h1 class="display hero__title" aria-label={LAB_NAME}>
+					{LAB_NAME.split(' ').map((word, i) => (
+						<>
+							{i > 0 && ' '}
+							<span class="word">
+								{[...word].map((char, ci) => {
+									charDelay += 24;
+									// The Hexo wordmark set the leading capital of every word at
+									// 600, and all of "Lab" — kept exactly.
+									const bold = word === 'Lab' || ci === 0;
+									return (
+										<span
+											class:list={['char', { 'char--bold': bold }]}
+											aria-hidden="true"
+											style={`animation-delay:${charDelay}ms`}
+										>
+											{char}
+										</span>
+									);
+								})}
+							</span>
+						</>
+					))}
+					</h1>
+				</div>
+				<div class="hero__actions">
+					<a class="btn" href="/research/">Explore our research <Icon name="arrow-right" size={17} /></a>
+					<a class="hero__people" href="/people/">Meet the lab <Icon name="arrow-right" size={17} /></a>
+				</div>
+			</div>
+		</div>
+
+	<div class="hero__progress" aria-hidden="true">
+		<div class="hero__progress-bar" id="hero-progress"></div>
+	</div>
+</section>

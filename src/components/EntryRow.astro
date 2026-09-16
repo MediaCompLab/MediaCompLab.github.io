@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { newsLink, type PostEntry } from '../utils/content';
+import { formatDate } from '../utils/url';
+
+/** One row of the news / archive list. */
+type Props = { post: PostEntry };
+
+const { post } = Astro.props;
+const link = newsLink(post);
+---
+
+<li class="entry">
+	<a
+		class="entry__link"
+		href={link.href}
+		target={link.external ? '_blank' : undefined}
+		rel={link.external ? 'noopener' : undefined}
+	>
+		<span class="entry__date">{formatDate(post.data.date ?? 0)}</span>
+		<span class="entry__title">{link.text}</span>
+		<Icon name="arrow-right" size={17} class="entry__arrow" />
+	</a>
+</li>

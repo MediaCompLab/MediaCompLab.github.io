@@ -1,0 +1,83 @@
+---
+import Icon from './Icon.astro';
+import { NAVBAR } from '../consts';
+
+/**
+ * Sticky white header: GSU lockup on the left, lab name, then the nav.
+ *
+ * The old theme stacked a blue banner above a beige navbar and animated a
+ * "magic line" with jQuery. Here it is one bar, and the active/hover indicator
+ * is a single element that slides — the page passes its own path in so the
+ * indicator can be positioned on first paint rather than after a JS round trip.
+ */
+type Props = {
+	/** Current path, e.g. `/people/`. Used to mark the active nav item. */
+	currentPath?: string;
+};
+
+const { currentPath = '/' } = Astro.props;
+
+const normalise = (p: string) => (p.endsWith('/') ? p : `${p}/`);
+const current = normalise(currentPath);
+
+const items = [
+	{ name: 'Home', path: '/', key: 'home' },
+	...NAVBAR.filter((item) => item.enable).map((item) => ({
+		name: item.name.charAt(0) + item.name.slice(1).toLowerCase(),
+		path: item.path,
+		key: item.key,
+	})),
+];
+
+const isActive = (path: string) => {
+	const target = normalise(path);
+	if (target === '/') return current === '/';
+	// `/people/virginia` should keep the People tab lit.
+	return current === target || current.startsWith(target);
+};
+
+/**
+ * The masthead carries only marks, as the Hexo navbar did — its brand anchor
+ * held nothing but the college lockup. The lab's name is set large in the hero;
+ * repeating it here only crowded the bar. The link keeps an accessible label.
+ */
+const LAB_NAME = 'Media Comprehension Lab';
+---
+
+<header class="site-header" id="site-header">
+	<div class="container site-header__inner">
+		<a class="brand" href="/" aria-label={`${LAB_NAME} home`}>
+			<span class="brand__school">
+				{/* Only the college lockup, as the Hexo navbar's brand anchor was — the
+				    lab's name is set large in the hero. This is the white lockup the
+				    theme used on this same blue. */}
+				<img src="/images/cehd-white2.png" alt="Georgia State University" width="1000" height="390" />
+			</span>
+		</a>
+
+		<button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+			<Icon name="menu" size={20} />
+			<span class="visually-hidden">Menu</span>
+		</button>
+
+		<nav class="site-nav" id="site-nav" aria-label="Main">
+			<ul class="site-nav__list">
+				{items.map((item) => (
+					<li>
+						<a
+							class="site-nav__link"
+							href={item.path}
+							data-nav
+							aria-current={isActive(item.path) ? 'page' : undefined}
+						>{item.name}</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	</div>
+
+	{/* The Hexo "magic line" sat at the bottom edge of the navbar, because its
+	    links had no padding of their own. Here it is anchored to the header's
+	    bottom edge so it lands in the same place. */}
+	<span class="site-nav__indicator" id="nav-indicator" aria-hidden="true"></span>
+</header>

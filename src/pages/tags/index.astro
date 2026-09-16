@@ -1,0 +1,60 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPostsNewestFirst, getTagsAlphabetical, newsLink } from '../../utils/content';
+import { absoluteUrl, formatDate } from '../../utils/url';
+
+// The navbar's NEWS item points at /tags/, which is the lab's news index.
+const tags = await getTagsAlphabetical();
+const posts = await getPostsNewestFirst();
+---
+
+<BaseLayout
+	title="News"
+	description="Recent news, awards and media appearances from the Media Comprehension Lab."
+	permalink={absoluteUrl('/tags/')}
+	shareTitle="News"
+>
+	<section class="section">
+		<div class="container">
+			<header class="page-head">
+				<h1 class="page-head__title">News</h1>
+			</header>
+
+			<ul class="tag-list reveal">
+				{tags.map((tag) => (
+					<li>
+						<a class="tag-chip" href={tag.path}>
+							{tag.name}
+							<span class="tag-chip__count">{tag.count}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+
+			<div class="section-head" style="margin-top: clamp(44px, 5vw, 68px);">
+				<h2>All updates</h2>
+			</div>
+
+			<ul class="entry-list">
+				{posts.map((post) => {
+					const link = newsLink(post);
+					return (
+						<li class="entry">
+							<a
+								class="entry__link"
+								href={link.href}
+								target={link.external ? '_blank' : undefined}
+								rel={link.external ? 'noopener' : undefined}
+							>
+								<span class="entry__date">{formatDate(post.data.date ?? 0)}</span>
+								<span class="entry__title">{link.text}</span>
+								<Icon name="arrow-right" size={17} class="entry__arrow" />
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

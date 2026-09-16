@@ -1,0 +1,48 @@
+---
+import { THEME } from '../consts';
+import { isExternalLink } from '../utils/url';
+
+const thisYear = String(new Date().getFullYear());
+
+/** footer._config replaced `{thisYear}` at render time in the Hexo theme. */
+const expandVars = (name: string) => name.replace(/\{thisYear\}/g, thisYear);
+---
+
+<footer class="site-footer">
+	<div class="container site-footer__inner">
+		<div class="site-footer__brand">
+			<img src="/images/icon_white.png" alt="" width="26" height="30" />
+			<div>
+				{THEME.footer.more.map((item) => (
+					<p class="site-footer__copy">
+						{item.path ? (
+							<a
+								href={item.path}
+								target={isExternalLink(item.path) ? '_blank' : undefined}
+								rel={isExternalLink(item.path) ? 'noopener' : undefined}
+							>{expandVars(item.name)}</a>
+						) : (
+							expandVars(item.name)
+						)}
+					</p>
+				))}
+			</div>
+		</div>
+
+		<ul class="site-footer__social">
+			{THEME.footer.social.map((item) => (
+				<li>
+					<a
+						href={item.path}
+						title={item.name}
+						target={isExternalLink(item.path) ? '_blank' : undefined}
+						rel={isExternalLink(item.path) ? 'noopener' : undefined}
+					>
+						<i class={item.icon === 'envelope' ? 'fa-regular fa-envelope' : `fa-brands fa-${item.icon}`} aria-hidden="true"></i>
+						<span class="visually-hidden">{item.name}</span>
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</footer>

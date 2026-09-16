@@ -1,0 +1,64 @@
+---
+import { getEntry, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPostsNewestFirst, newsLink } from '../utils/content';
+import { absoluteUrl, formatDate } from '../utils/url';
+import Icon from '../components/Icon.astro';
+
+// source/index.md carries `layout: home`; the hero lives in the layout and the
+// page body provides the intro plus the three research areas.
+const page = await getEntry('pages', 'index');
+if (!page) throw new Error('Missing content page: src/content/pages/index.md');
+
+const { Content } = await render(page);
+const permalink = absoluteUrl('/');
+const title = page.data.title ?? undefined;
+
+const latest = (await getPostsNewestFirst()).slice(0, 3);
+const hasNews = (await getCollection('posts')).length > 0;
+---
+
+<BaseLayout title={title} permalink={permalink} shareTitle={title ?? ''}>
+	<Hero />
+	<Content />
+
+	{hasNews && (
+		<section class="section">
+			<div class="container">
+				<div class="section-head reveal">
+					<span class="eyebrow">News</span>
+					<h2>Recent activity</h2>
+				</div>
+
+				<ul class="entry-list">
+					{latest.map((post) => {
+						const link = newsLink(post);
+						return (
+							<li class="entry">
+								<a
+									class="entry__link"
+									href={link.href}
+									target={link.external ? '_blank' : undefined}
+									rel={link.external ? 'noopener' : undefined}
+								>
+									<span class="entry__date">{formatDate(post.data.date ?? 0)}</span>
+									<span class="entry__title">{link.text}</span>
+									<Icon name="arrow-right" size={17} class="entry__arrow" />
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+
+				<p style="margin-top: 28px;">
+					<a class="btn btn--ghost" href="/tags/">
+						All news
+						<Icon name="arrow-right" size={17} />
+					</a>
+				</p>
+			</div>
+		</section>
+	)}
+</BaseLayout>

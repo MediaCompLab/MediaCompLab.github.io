@@ -1,0 +1,51 @@
+---
+import Head from '../components/Head.astro';
+import SearchOverlay from '../components/SearchOverlay.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Tools from '../components/Tools.astro';
+import { SITE } from '../consts';
+import '../styles/site.css';
+
+/**
+ * The single shell every page renders into.
+ */
+type Props = {
+	/** Page title, without the site name. */
+	title?: string;
+	description?: string;
+	noindex?: boolean;
+	/** Absolute permalink, used by the share buttons. */
+	permalink?: string;
+	/** Raw `page.title` as used by the share links. */
+	shareTitle?: string;
+};
+
+const { title, description, noindex = false, permalink, shareTitle = '' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={SITE.language}>
+	<head>
+		<Head title={title} description={description} noindex={noindex} />
+		<slot name="head" />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<SiteHeader currentPath={currentPath} />
+		<main id="main">
+			<slot />
+		</main>
+		<SiteFooter />
+		<Tools permalink={permalink} pageTitle={shareTitle} />
+		<SearchOverlay />
+
+		{/* Imported from a <script> tag, not the frontmatter, so Astro bundles it
+		    for the browser instead of running it during the build. */}
+		<script>
+			import '../scripts/site.js';
+		</script>
+	</body>
+</html>
