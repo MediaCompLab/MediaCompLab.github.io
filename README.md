@@ -198,22 +198,36 @@ only rendering both builds caught it.
 
 ## Deploying
 
-GitHub Actions (`.github/workflows/deploy.yml`) builds and publishes to GitHub Pages. One-time setup:
+**Pushing to `main` is the whole procedure.** `.github/workflows/deploy.yml` runs `npm ci` and
+`npm run build` on a GitHub runner, uploads `dist/` as a Pages artifact, and publishes it. Nothing is
+built locally for a deploy, and `update-site.bat` is just a convenience wrapper around
+`git add -A && git commit && git push`.
 
-1. Point this folder at the Pages repository:
-   ```bash
-   git init
-   git branch -M main
-   git remote add origin https://github.com/MediaCompLab/MediaCompLab.github.io.git
-   git add -A
-   git commit -m "Redesign the lab site"
-   git push -u origin main
-   ```
-2. In **Settings → Pages**, set **Source** to *GitHub Actions*.
-3. Keep `public/CNAME` so `mediacomplab.com` keeps resolving.
+The repository has already been set up:
 
-After that, `update-site.bat` (or a plain `git push`) is all that is needed. The old `hexo deploy`
-flow is retired — `hexo/` is no longer built.
+* Pages **Source** is *GitHub Actions* (`build_type: workflow`). It used to be *Deploy from a branch*
+  with the Hexo output committed at the repo root; that output is now the previous commit rather
+  than the working tree, so this branch holds source.
+* `mediacomplab.com` is the Pages custom domain, and `public/CNAME` carries the same name so the
+  artifact keeps it. **Both are needed** — the file alone is not enough with Actions-based Pages.
+* DNS for `mediacomplab.com` sits behind Cloudflare, which proxies to GitHub Pages. Cloudflare
+  terminates TLS at the edge, so the site is served over HTTPS even while GitHub is issuing its own
+  certificate for the domain.
+
+> **If the custom domain ever goes missing**, the symptom is `mediacomplab.com` returning 404 while
+> `mediacomplab.github.io` still serves fine — the artifact is deployed but the domain is not
+> attached to it. Re-add it and re-run the workflow:
+>
+> ```bash
+> gh api -X PUT repos/MediaCompLab/MediaCompLab.github.io/pages -f cname=mediacomplab.com
+> gh workflow run "Deploy to GitHub Pages"
+> ```
+>
+> Changing `build_type` clears the custom domain, and `https_enforced` with it; the latter can only
+> be turned back on once GitHub has issued the certificate, which takes a few minutes.
+
+The old `hexo deploy` flow is retired — `hexo/` is no longer built, and pushing its output to this
+branch would now be published as source, not as a site.
 
 ---
 
